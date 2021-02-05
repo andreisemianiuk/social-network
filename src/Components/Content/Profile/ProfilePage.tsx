@@ -1,13 +1,14 @@
 import React from 'react'
+import { imgUrl } from '../../../images/template/image'
+import { Posts } from './Posts/Posts'
+import styles from './Profile.module.css'
 
-type ProfilePageType = {
-  title: string
-}
 
-export const ProfilePage: React.FC<ProfilePageType> = (props) => {
+export const ProfilePage = () => {
   return (
-    <div>
-      {props.title}
+    <div className={styles.container}>
+      <img className={styles.image} src={imgUrl} alt='content'/>
+      <Posts />
     </div>
   )
 }

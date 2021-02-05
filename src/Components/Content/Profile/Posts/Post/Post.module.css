@@ -1,0 +1,17 @@
+.post {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 80%;
+	margin-top: 20px;
+}
+
+.img {
+	width: 50px;
+	border-radius: 50%;
+}
+
+.likes {
+	display: flex;
+	flex-direction: column;
+}

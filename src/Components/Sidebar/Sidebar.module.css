@@ -1,12 +1,18 @@
-.wrapper {
-	/*background-color: red;*/
-}
 .nav {
 	grid-area: nav;
 	background-color: firebrick;
 }
 
+.link {
+	padding: 5px 20px;
+}
+
 .link a {
+	font-size: 20px;
 	color: white;
 	text-decoration: none;
+}
+
+.link a.active {
+	color: gold;
 }

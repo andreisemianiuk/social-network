@@ -6,16 +6,13 @@ const Sidebar = () => {
   return (
     <nav className={s.nav}>
       <div className={s.link}>
-        <NavLink to='/profile'>Profile</NavLink>
+        <NavLink to='/profile' activeClassName={s.active}>Profile</NavLink>
       </div>
       <div className={s.link}>
-        <NavLink to='/dialogs'>Dialogs</NavLink>
+        <NavLink to='/dialogs' activeClassName={s.active}>Dialogs</NavLink>
       </div>
       <div className={s.link}>
-        <NavLink to='/posts'>Posts</NavLink>
-      </div>
-      <div className={s.link}>
-        <NavLink to='/friends'>Friends</NavLink>
+        <NavLink to='/friends' activeClassName={s.active}>Friends</NavLink>
       </div>
     </nav>
   )

@@ -1,9 +1,19 @@
 .header {
 	grid-area: header;
-	background-color: yellowgreen;
-	padding: 3px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-left: 35px;
+	padding-right: 100px;
 }
 
-.header img {
-	width: 35px;
+.img {
+	width: 60px;
+}
+
+.logo {
+	font-size: 40px;
+	color: red;
+	font-weight: bold;
+	text-transform: uppercase;
 }
