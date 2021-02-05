@@ -1,0 +1,12 @@
+.wrapper {
+	/*background-color: red;*/
+}
+.nav {
+	grid-area: nav;
+	background-color: firebrick;
+}
+
+.link a {
+	color: white;
+	text-decoration: none;
+}
