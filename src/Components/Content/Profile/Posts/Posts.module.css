@@ -7,6 +7,10 @@
 	height: 70px;
 }
 
+.error {
+	color: red;
+}
+
 .btn {
 	width: 50px;
 	background-color: green;

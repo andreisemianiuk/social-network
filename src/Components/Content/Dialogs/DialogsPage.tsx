@@ -2,25 +2,21 @@ import React from 'react'
 import styles from './DialogsPage.module.css'
 import { DialogsMember } from './DialogsMember/DialogsMember'
 import { DialogsMessage } from './DialogsMessage/DialogsMessage'
+import { generateKey } from '../../../utilities/keyCreator'
+import { DialogsType } from '../../../redux/state'
 
+type DialogsPagePropsType = {
+  dialogs: DialogsType[]
+}
 
-export const DialogsPage = () => {
+export const DialogsPage = (props: DialogsPagePropsType) => {
   return (
     <div className={styles.container}>
       <div className={styles.members}>
-        <DialogsMember name={'Andrey'} id={1}/>
-        <DialogsMember name={'Vika'} id={2}/>
-        <DialogsMember name={'Gosha'} id={3}/>
-        <DialogsMember name={'Lera'} id={4}/>
-        <DialogsMember name={'Sveta'} id={5}/>
+        {props.dialogs.map(v => (<DialogsMember key={generateKey(v.name)} name={v.name} id={v.id}/>))}
       </div>
       <div className={styles.dialogs}>
-        <DialogsMessage message={'hello'}/>
-        <DialogsMessage message={'hoe are you?'}/>
-        <DialogsMessage message={'what\'s up'}/>
-        <DialogsMessage message={'how old are you?'}/>
-        <DialogsMessage message={'do you like coffee?'}/>
-        <DialogsMessage message={'are you funny?'}/>
+        {props.dialogs.map(v => (<DialogsMessage key={generateKey(v.name)} message={v.message}/>))}
       </div>
     </div>
   )

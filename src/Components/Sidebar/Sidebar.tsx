@@ -1,18 +1,30 @@
 import React from 'react'
-import s from './Sidebar.module.css'
+import styles from './Sidebar.module.css'
 import { NavLink } from 'react-router-dom'
+import { generateKey } from '../../utilities/keyCreator'
+import { Avatar } from '../../images/template/avatar'
 
-const Sidebar = () => {
+type SidebarType = {
+  friends: string[]
+}
+
+const Sidebar = (props: SidebarType) => {
   return (
-    <nav className={s.nav}>
-      <div className={s.link}>
-        <NavLink to='/profile' activeClassName={s.active}>Profile</NavLink>
+    <nav className={styles.nav}>
+      <div className={styles.link}>
+        <NavLink to='/profile' activeClassName={styles.active}>Profile</NavLink>
       </div>
-      <div className={s.link}>
-        <NavLink to='/dialogs' activeClassName={s.active}>Dialogs</NavLink>
+      <div className={styles.link}>
+        <NavLink to='/dialogs' activeClassName={styles.active}>Dialogs</NavLink>
       </div>
-      <div className={s.link}>
-        <NavLink to='/friends' activeClassName={s.active}>Friends</NavLink>
+      <div className={`${styles.link} ${styles.friends}`}>
+        <NavLink to='/friends' activeClassName={styles.active}>Friends</NavLink>
+      </div>
+      <div className={styles.friendsWrapper}>
+        {props.friends.map(v => (<div className={styles.friend} key={generateKey(v)}>
+          <img className={styles.img} src={Avatar} alt='ava'/>
+          <div className={styles.name}>{v}</div>
+        </div>))}
       </div>
     </nav>
   )

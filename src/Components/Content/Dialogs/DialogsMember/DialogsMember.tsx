@@ -4,7 +4,7 @@ import styles from './DialogsMember.module.css'
 
 type DialogsMemberType = {
   name: string
-  id: number
+  id: string
 }
 
 export const DialogsMember: React.FC<DialogsMemberType> = (props) => {
