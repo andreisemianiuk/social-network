@@ -1,10 +1,9 @@
-import { rerenderEntireTree } from '../render'
 import { v1 } from 'uuid'
 
 export type DialogsType = {
   id: string
   name: string
-  message: string
+  messages: string[]
 }
 
 export type ProfilePageType = {
@@ -26,39 +25,27 @@ export type StateType = {
   sidebar: string[]
 }
 
+let rerenderEntireTree = () => {
+  console.log('state had changed')
+}
 
 let state: StateType = {
   dialogsPage: [
     {
       id: v1(),
       name: 'Andrey',
-      message: 'hello'
+      messages: ['hello', 'hey', 'bye']
     },
     {
       id: v1(),
       name: 'Vika',
-      message: 'how are you?'
+      messages: ['how are you?', 'ok']
     },
     {
       id: v1(),
       name: 'Gosha',
-      message: 'what\'s up'
-    },
-    {
-      id: v1(),
-      name: 'Lera',
-      message: 'how old are you?'
-    },
-    {
-      id: v1(),
-      name: 'Sveta',
-      message: 'do you like coffee?'
-    },
-    {
-      id: v1(),
-      name: 'Dima',
-      message: 'are you funny?'
-    },
+      messages: ['what\'s up']
+    }
   ],
   profilePage: {
     newPostText: '',
@@ -81,12 +68,21 @@ export const addPost = () => {
     likes: Math.floor(Math.random() * 100),
     dislikes: Math.floor(Math.random() * 100)
   })
-  rerenderEntireTree(state)
+  state.profilePage.newPostText = ''
+  rerenderEntireTree()
 }
 
 export const changeText = (newText: string) => {
   state.profilePage.newPostText = newText
-  rerenderEntireTree(state)
+  rerenderEntireTree()
 }
+
+export const subscribe = (observer: () => void) => {
+  rerenderEntireTree = observer
+}
+
+// export const sendMessage = (id: string) => {
+//   let person = state.dialogsPage.filter(d => d.id === id)
+// }
 
 export default state

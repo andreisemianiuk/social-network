@@ -1,14 +1,27 @@
 .post {
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
-	width: 80%;
+	width: 40%;
 	margin-top: 20px;
+	margin-left: 50px;
+}
+
+.desk {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 .img {
 	width: 50px;
 	border-radius: 50%;
+}
+
+.message {
+	max-width: 200px;
+	word-break: break-word;
 }
 
 .likes {

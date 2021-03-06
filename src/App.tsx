@@ -18,7 +18,7 @@ function App(props: AppPropsType) {
       <div className='container'>
         <Header/>
         <Sidebar friends={props.state.sidebar}/>
-        <Content state={props.state} addPost={props.addPost} changeText={props.changeText}/>
+        <Content state={props.state} addPost={props.addPost} changeText={props.changeText} />
       </div>
     </BrowserRouter>
   )

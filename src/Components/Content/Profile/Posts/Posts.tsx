@@ -14,22 +14,18 @@ type PostsPropsType = {
 export const Posts = ({posts,message,changeText,addPost}: PostsPropsType) => {
 
   let [error, setError] = useState<string>('')
-  const [value, setValue] = useState<string>('')
   
   const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>)  => {
-    const currentValue = e.currentTarget.value
-    if (currentValue) {
+    const value = e.currentTarget.value
+    if (value) {
       setError('')
-      changeText(currentValue)
-      setValue(currentValue)
     }
-    
+    changeText(value)
   }
   const addPostHandler = () => {
     if (message) {
       addPost()
       changeText('')
-      setValue('')
     } else {
       setError('Required text')
     }
@@ -37,9 +33,12 @@ export const Posts = ({posts,message,changeText,addPost}: PostsPropsType) => {
   const onKeyPressHandler =(e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
-      addPost()
-      setValue('')
-      changeText(value)
+      if (message) {
+        addPost()
+        changeText('')
+      } else {
+        setError('Required text')
+      }
     }
   }
 

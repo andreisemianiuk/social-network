@@ -1,5 +1,6 @@
 .container {
 	padding: 10px;
+	margin-left: 20px;
 }
 
 .container a {
@@ -10,5 +11,5 @@
 }
 
 .active {
-	color: gold;
+	color: crimson;
 }

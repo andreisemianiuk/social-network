@@ -1,8 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './DialogsPage.module.css'
 import { DialogsMember } from './DialogsMember/DialogsMember'
-import { DialogsMessage } from './DialogsMessage/DialogsMessage'
-import { generateKey } from '../../../utilities/keyCreator'
 import { DialogsType } from '../../../redux/state'
 
 type DialogsPagePropsType = {
@@ -10,13 +8,22 @@ type DialogsPagePropsType = {
 }
 
 export const DialogsPage = (props: DialogsPagePropsType) => {
+  const [value, setValue] = useState<string>('')
+  
+  // const sendMessage = (id: string) => {
+  //   props.sendMessage(id)
+  // }
+  
   return (
     <div className={styles.container}>
       <div className={styles.members}>
-        {props.dialogs.map(v => (<DialogsMember key={generateKey(v.name)} name={v.name} id={v.id}/>))}
+        {props.dialogs.map(v => (<DialogsMember key={v.id} name={v.name} id={v.id} messages={v.messages}/>))}
       </div>
-      <div className={styles.dialogs}>
-        {props.dialogs.map(v => (<DialogsMessage key={generateKey(v.name)} message={v.message}/>))}
+      <div>
+        <textarea value={value} onChange={(e) => setValue(e.currentTarget.value)}/>
+        <div>
+          <button onClick={() => (alert('send message'))}>Send message</button>
+        </div>
       </div>
     </div>
   )
