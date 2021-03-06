@@ -4,12 +4,11 @@ import Sidebar from './Components/Sidebar/Sidebar'
 import Header from './Components/Header/Header'
 import Content from './Components/Content/Content'
 import { BrowserRouter } from 'react-router-dom'
-import { StateType } from './redux/state'
+import { ActionsTypes, StateType } from './redux/state'
 
 export type AppPropsType = {
   state: StateType
-  addPost: () => void
-  changeText: (text: string) => void
+  dispatch: (action: ActionsTypes) => void
 }
 
 function App(props: AppPropsType) {
@@ -18,7 +17,7 @@ function App(props: AppPropsType) {
       <div className='container'>
         <Header/>
         <Sidebar friends={props.state.sidebar}/>
-        <Content state={props.state} addPost={props.addPost} changeText={props.changeText} />
+        <Content state={props.state} dispatch={props.dispatch} />
       </div>
     </BrowserRouter>
   )

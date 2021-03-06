@@ -1,17 +1,16 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
 import styles from './Posts.module.css'
 import { Post } from './Post/Post'
-import { PostType } from '../../../../redux/state'
+import { ActionsTypes, addPostAC, changeTextAC, PostType } from '../../../../redux/state'
 import { generateKey } from '../../../../utilities/keyCreator'
 
 type PostsPropsType = {
   posts: PostType[]
   message: string
-  addPost: () => void
-  changeText: (t: string) => void
+  dispatch: (action: ActionsTypes) => void
 }
 
-export const Posts = ({posts,message,changeText,addPost}: PostsPropsType) => {
+export const Posts = ({posts,message,dispatch}: PostsPropsType) => {
 
   let [error, setError] = useState<string>('')
   
@@ -20,12 +19,12 @@ export const Posts = ({posts,message,changeText,addPost}: PostsPropsType) => {
     if (value) {
       setError('')
     }
-    changeText(value)
+    dispatch(changeTextAC(value))
   }
   const addPostHandler = () => {
     if (message) {
-      addPost()
-      changeText('')
+      dispatch(addPostAC())
+      dispatch(changeTextAC(''))
     } else {
       setError('Required text')
     }
@@ -34,8 +33,8 @@ export const Posts = ({posts,message,changeText,addPost}: PostsPropsType) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
       if (message) {
-        addPost()
-        changeText('')
+        dispatch(addPostAC())
+        dispatch(changeTextAC(''))
       } else {
         setError('Required text')
       }

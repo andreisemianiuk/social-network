@@ -11,8 +11,7 @@ const Content = (props: AppPropsType) => {
     <div className={styles.content}>
       <Route path='/profile' render={() => <ProfilePage posts={props.state.profilePage.posts}
                                                         message={props.state.profilePage.newPostText}
-                                                        addPost={props.addPost}
-                                                        changeText={props.changeText}/>}/>
+                                                        dispatch={props.dispatch}/>}/>
       <Route path='/dialogs' render={() => <DialogsPage dialogs={props.state.dialogsPage}/>}/>
       <Route path='/friends' render={() => <FriendsPage/>}/>
     </div>
