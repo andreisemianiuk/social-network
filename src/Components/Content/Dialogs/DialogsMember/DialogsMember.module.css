@@ -13,3 +13,7 @@
 .active {
 	color: crimson;
 }
+
+.sendIcon {
+	display: inline-block;
+}

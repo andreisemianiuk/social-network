@@ -1,7 +1,7 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
 import styles from './Posts.module.css'
 import { Post } from './Post/Post'
-import { ActionsTypes, addPostAC, changeTextAC, PostType } from '../../../../redux/state'
+import { ActionsTypes, addPostAC, changePostTextAC, PostType } from '../../../../redux/state'
 import { generateKey } from '../../../../utilities/keyCreator'
 
 type PostsPropsType = {
@@ -19,12 +19,12 @@ export const Posts = ({posts,message,dispatch}: PostsPropsType) => {
     if (value) {
       setError('')
     }
-    dispatch(changeTextAC(value))
+    dispatch(changePostTextAC(value))
   }
   const addPostHandler = () => {
     if (message) {
       dispatch(addPostAC())
-      dispatch(changeTextAC(''))
+      dispatch(changePostTextAC(''))
     } else {
       setError('Required text')
     }
@@ -34,7 +34,7 @@ export const Posts = ({posts,message,dispatch}: PostsPropsType) => {
       e.preventDefault()
       if (message) {
         dispatch(addPostAC())
-        dispatch(changeTextAC(''))
+        dispatch(changePostTextAC(''))
       } else {
         setError('Required text')
       }

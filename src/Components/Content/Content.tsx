@@ -9,10 +9,16 @@ import { AppPropsType } from '../../App'
 const Content = (props: AppPropsType) => {
   return (
     <div className={styles.content}>
-      <Route path='/profile' render={() => <ProfilePage posts={props.state.profilePage.posts}
-                                                        message={props.state.profilePage.newPostText}
-                                                        dispatch={props.dispatch}/>}/>
-      <Route path='/dialogs' render={() => <DialogsPage dialogs={props.state.dialogsPage}/>}/>
+      <Route path='/profile'
+             render={() => <ProfilePage posts={props.state.profilePage.posts}
+                                        message={props.state.profilePage.newPostText}
+                                        dispatch={props.dispatch}/>
+             }
+      />
+      <Route path='/dialogs'
+             render={() => <DialogsPage dialogs={props.state.dialogsPage.dialogs}
+                                        dispatch={props.dispatch} />
+             }/>
       <Route path='/friends' render={() => <FriendsPage/>}/>
     </div>
   )

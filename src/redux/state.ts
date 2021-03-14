@@ -6,6 +6,11 @@ export type DialogsType = {
   messages: string[]
 }
 
+export type DialogsPageType = {
+  newDialogText: string
+  dialogs: DialogsType[]
+}
+
 export type ProfilePageType = {
   newPostText: string
   posts: PostType[]
@@ -20,12 +25,13 @@ export type PostType = {
 }
 
 export type StateType = {
-  dialogsPage: DialogsType[]
+  dialogsPage: DialogsPageType
   profilePage: ProfilePageType
   sidebar: string[]
 }
 
-export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeTextAC>
+export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changePostTextAC>
+                            | ReturnType<typeof changeDialogTextAC> | ReturnType<typeof sendDialogMessageAC>
 
 export type StoreType = {
   _state: StateType
@@ -37,23 +43,28 @@ export type StoreType = {
 
 let store: StoreType = {
   _state: {
-  dialogsPage: [
-    {
-      id: v1(),
-      name: 'Andrey',
-      messages: ['hello', 'hey', 'bye']
-    },
-    {
-      id: v1(),
-      name: 'Vika',
-      messages: ['how are you?', 'ok']
-    },
-    {
-      id: v1(),
-      name: 'Gosha',
-      messages: ['what\'s up']
-    }
-  ],
+  dialogsPage: {
+    newDialogText: '',
+    dialogs: [
+      {
+        id: v1(),
+        name: 'Andrey',
+        messages: ['hello', 'hey', 'bye']
+      },
+      {
+        id: v1(),
+        name: 'Vika',
+        messages: ['how are you?', 'ok']
+      },
+      {
+        id: v1(),
+        name: 'Gosha',
+        messages: ['what\'s up']
+      }
+    ]
+  }
+    
+    ,
   profilePage: {
     newPostText: '',
     posts: [
@@ -87,6 +98,15 @@ let store: StoreType = {
     } else if (action.type === 'CHANGE_TEXT') {
         this._state.profilePage.newPostText = action.newText
         this._callSubscriber()
+    } else if (action.type === 'CHANGE_DIALOG_TEXT') {
+      this._state.dialogsPage.newDialogText = action.newText
+      this._callSubscriber()
+    } else if (action.type === 'SEND_DIALOG_MESSAGE') {
+      let friend = this._state.dialogsPage.dialogs.find(i => i.id === action.id)
+      if (friend) {
+        friend.messages.push(action.newText)
+      }
+      this._callSubscriber()
     }
   }
 }
@@ -97,10 +117,25 @@ export const addPostAC = () => {
   } as const
 }
 
-export const changeTextAC = (text: string) => {
+export const changePostTextAC = (text: string) => {
   return {
     type: 'CHANGE_TEXT',
     newText: text
+  } as const
+}
+
+export const changeDialogTextAC = (text: string) => {
+  return {
+    type: 'CHANGE_DIALOG_TEXT',
+    newText: text
+  } as const
+}
+
+export const sendDialogMessageAC = (text: string, id: string) => {
+  return {
+    type: 'SEND_DIALOG_MESSAGE',
+    newText: text,
+    id: id
   } as const
 }
 
