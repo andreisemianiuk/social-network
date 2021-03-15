@@ -1,13 +1,14 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
 import styles from './Posts.module.css'
 import { Post } from './Post/Post'
-import { ActionsTypes, addPostAC, changePostTextAC, PostType } from '../../../../redux/state'
+import { ActionTypes, PostType } from '../../../../redux/state'
 import { generateKey } from '../../../../utilities/keyCreator'
+import { addPostAC, changePostTextAC } from '../../../../redux/reducers/profile-reducer'
 
 type PostsPropsType = {
   posts: PostType[]
   message: string
-  dispatch: (action: ActionsTypes) => void
+  dispatch: (action: ActionTypes) => void
 }
 
 export const Posts = ({posts,message,dispatch}: PostsPropsType) => {

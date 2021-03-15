@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './DialogsPage.module.css'
 import { DialogsMember } from './DialogsMember/DialogsMember'
-import { ActionsTypes, DialogsType } from '../../../redux/state'
+import { ActionTypes, DialogsType } from '../../../redux/state'
 
 type DialogsPagePropsType = {
   dialogs: DialogsType[]
-  dispatch: (action: ActionsTypes) => void
+  dispatch: (action: ActionTypes) => void
 }
 
 export const DialogsPage = (props: DialogsPagePropsType) => {

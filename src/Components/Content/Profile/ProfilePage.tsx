@@ -2,12 +2,12 @@ import React from 'react'
 import { imgUrl } from '../../../images/template/image'
 import { Posts } from './Posts/Posts'
 import styles from './Profile.module.css'
-import { ActionsTypes, PostType } from '../../../redux/state'
+import { ActionTypes, PostType } from '../../../redux/state'
 
 type ProfilePagePropsType = {
   posts: PostType[]
   message: string
-  dispatch: (action: ActionsTypes) => void
+  dispatch: (action: ActionTypes) => void
 }
 
 export const ProfilePage = (props: ProfilePagePropsType) => {

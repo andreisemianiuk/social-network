@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import styles from './DialogsMember.module.css'
 import { DialogsSender } from './DialogsSender'
-import { ActionsTypes } from '../../../../redux/state'
+import { ActionTypes } from '../../../../redux/state'
 
 type DialogsMemberType = {
   id: string
   name: string
   messages: string[]
-  dispatch: (action: ActionsTypes) => void
+  dispatch: (action: ActionTypes) => void
 }
 
 export const DialogsMember: React.FC<DialogsMemberType> = (props) => {

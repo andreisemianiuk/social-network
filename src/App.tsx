@@ -4,11 +4,11 @@ import Sidebar from './Components/Sidebar/Sidebar'
 import Header from './Components/Header/Header'
 import Content from './Components/Content/Content'
 import { BrowserRouter } from 'react-router-dom'
-import { ActionsTypes, StateType } from './redux/state'
+import { ActionTypes, StateType } from './redux/state'
 
 export type AppPropsType = {
   state: StateType
-  dispatch: (action: ActionsTypes) => void
+  dispatch: (action: ActionTypes) => void
 }
 
 function App(props: AppPropsType) {

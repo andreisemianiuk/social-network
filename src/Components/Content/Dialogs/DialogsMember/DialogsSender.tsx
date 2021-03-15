@@ -1,10 +1,11 @@
 import React, { ChangeEvent, useState } from 'react'
-import { ActionsTypes, changeDialogTextAC, sendDialogMessageAC } from '../../../../redux/state'
-// import styles from './DialogsMember.module.css'
+import { changeDialogTextAC, sendDialogMessageAC } from '../../../../redux/reducers/dialog-reducer'
+import { ActionTypes } from '../../../../redux/state'
+import styles from './DialogsMember.module.css'
 
 type DialogsSenderType = {
   id: string
-  dispatch: (action: ActionsTypes) => void
+  dispatch: (action: ActionTypes) => void
 }
 
 export const DialogsSender = (props: DialogsSenderType) => {
@@ -15,7 +16,7 @@ export const DialogsSender = (props: DialogsSenderType) => {
     setValue(newValue)
     props.dispatch(changeDialogTextAC(newValue))
   }
-  const sendMessage = () => {
+  const sendMessage = () => {debugger
     props.dispatch(sendDialogMessageAC(value,props.id))
     setValue('')
     props.dispatch(changeDialogTextAC(value))
@@ -25,7 +26,7 @@ export const DialogsSender = (props: DialogsSenderType) => {
     <div>
       <textarea value={value} onChange={onChange}/>
       <div>
-        <button onClick={sendMessage}>Send message</button>
+        <button className={styles.sendMessageBtn} onClick={sendMessage}>Send message</button>
       </div>
     </div>
   )

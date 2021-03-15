@@ -17,3 +17,7 @@
 .sendIcon {
 	display: inline-block;
 }
+
+.sendMessageBtn {
+	cursor: pointer;
+}
