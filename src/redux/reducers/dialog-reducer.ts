@@ -3,15 +3,16 @@ import { ActionTypes, CHANGE_DIALOG_TEXT, DialogsPageType, SEND_DIALOG_MESSAGE }
 export const dialogReducer = (state: DialogsPageType, action: ActionTypes) => {
   switch (action.type) {
     case SEND_DIALOG_MESSAGE:
-      const friend = state.dialogs.find(i => i.id === action.id)
-      if (friend) {
-        friend.messages.push(action.newText)
+      return {
+        ...state,
+        dialogs: state.dialogs.map(d => d.id === action.id
+          ? {...d, messages: [...d.messages, action.newText]}
+          : d),
       }
-      return state
     case CHANGE_DIALOG_TEXT:
       return {
         ...state,
-        newDialogText: action.newText
+        newDialogText: action.newText,
       }
     default:
       return state
