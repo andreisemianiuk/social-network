@@ -4,7 +4,7 @@ import Sidebar from './Components/Sidebar/Sidebar'
 import Header from './Components/Header/Header'
 import Content from './Components/Content/Content'
 import { BrowserRouter } from 'react-router-dom'
-import { ActionTypes, StateType } from './redux/state'
+import { ActionTypes, StateType } from './redux/store'
 
 export type AppPropsType = {
   state: StateType

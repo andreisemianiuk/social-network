@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Post.module.css'
 import { Avatar } from '../../../../../images/template/avatar'
-import { PostType } from '../../../../../redux/state'
+import { PostType } from '../../../../../redux/store'
 
 
 export const Post: React.FC<PostType> = ({name, message, likes, dislikes}) => {

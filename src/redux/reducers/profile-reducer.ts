@@ -1,5 +1,5 @@
 import { v1 } from 'uuid'
-import { ActionTypes, ADD_POST, CHANGE_POST_TEXT, ProfilePageType } from '../state'
+import { ActionTypes, ADD_POST, CHANGE_POST_TEXT, ProfilePageType } from '../store'
 
 export const profileReducer = (state: ProfilePageType, action: ActionTypes) => {
   switch (action.type) {

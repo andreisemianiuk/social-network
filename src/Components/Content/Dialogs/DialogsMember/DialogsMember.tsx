@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import styles from './DialogsMember.module.css'
 import { DialogsSender } from './DialogsSender'
-import { ActionTypes } from '../../../../redux/state'
+import { ActionTypes } from '../../../../redux/store'
 
 type DialogsMemberType = {
   id: string

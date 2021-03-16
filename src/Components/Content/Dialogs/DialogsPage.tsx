@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './DialogsPage.module.css'
 import { DialogsMember } from './DialogsMember/DialogsMember'
-import { ActionTypes, DialogsType } from '../../../redux/state'
+import { ActionTypes, DialogsType } from '../../../redux/store'
 
 type DialogsPagePropsType = {
   dialogs: DialogsType[]

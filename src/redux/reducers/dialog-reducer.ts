@@ -1,4 +1,4 @@
-import { ActionTypes, CHANGE_DIALOG_TEXT, DialogsPageType, SEND_DIALOG_MESSAGE } from '../state'
+import { ActionTypes, CHANGE_DIALOG_TEXT, DialogsPageType, SEND_DIALOG_MESSAGE } from '../store'
 
 export const dialogReducer = (state: DialogsPageType, action: ActionTypes) => {
   switch (action.type) {

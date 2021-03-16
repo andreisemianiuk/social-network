@@ -1,7 +1,7 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
 import styles from './Posts.module.css'
 import { Post } from './Post/Post'
-import { ActionTypes, PostType } from '../../../../redux/state'
+import { ActionTypes, PostType } from '../../../../redux/store'
 import { generateKey } from '../../../../utilities/keyCreator'
 import { addPostAC, changePostTextAC } from '../../../../redux/reducers/profile-reducer'
 

@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react'
 import { changeDialogTextAC, sendDialogMessageAC } from '../../../../redux/reducers/dialog-reducer'
-import { ActionTypes } from '../../../../redux/state'
+import { ActionTypes } from '../../../../redux/store'
 import styles from './DialogsMember.module.css'
 
 type DialogsSenderType = {

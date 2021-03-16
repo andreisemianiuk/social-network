@@ -2,7 +2,7 @@ import React from 'react'
 import { imgUrl } from '../../../images/template/image'
 import { Posts } from './Posts/Posts'
 import styles from './Profile.module.css'
-import { ActionTypes, PostType } from '../../../redux/state'
+import { ActionTypes, PostType } from '../../../redux/store'
 
 type ProfilePagePropsType = {
   posts: PostType[]
