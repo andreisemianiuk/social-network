@@ -17,9 +17,10 @@ const Content = (props: AppPropsType) => {
       />
       <Route path='/dialogs'
              render={() => <DialogsPage dialogs={props.state.dialogsPage.dialogs}
-                                        dispatch={props.dispatch} />
+                                        dispatch={props.dispatch}/>
              }/>
-      <Route path='/friends' render={() => <FriendsPage/>}/>
+      <Route path='/friends' render={() => <FriendsPage sidebar={props.state.sidebar}
+                                                        dispatch={props.dispatch} />}/>
     </div>
   )
 }

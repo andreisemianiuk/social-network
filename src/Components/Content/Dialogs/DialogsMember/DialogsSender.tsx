@@ -16,7 +16,7 @@ export const DialogsSender = (props: DialogsSenderType) => {
     setValue(newValue)
     props.dispatch(changeDialogTextAC(newValue))
   }
-  const sendMessage = () => {debugger
+  const sendMessage = () => {
     props.dispatch(sendDialogMessageAC(value,props.id))
     setValue('')
     props.dispatch(changeDialogTextAC(value))

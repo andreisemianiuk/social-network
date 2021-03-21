@@ -1,6 +1,7 @@
 import { v1 } from 'uuid'
 import { addPostAC, changePostTextAC, profileReducer } from './reducers/profile-reducer'
-import { changeDialogTextAC,  dialogReducer, sendDialogMessageAC } from './reducers/dialog-reducer'
+import { changeDialogTextAC, dialogReducer, sendDialogMessageAC } from './reducers/dialog-reducer'
+import { changeFriendAC, sendFriendAC, sidebarReducer } from './reducers/sidebar-reducer'
 
 export type DialogsType = {
   id: string
@@ -26,14 +27,24 @@ export type PostType = {
   dislikes: number
 }
 
+export type SidebarType = {
+  newFriend: string
+  friends: string[]
+}
+
 export type StateType = {
   dialogsPage: DialogsPageType
   profilePage: ProfilePageType
-  sidebar: string[]
+  sidebar: SidebarType
 }
 
-export type ActionTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changePostTextAC>
-  | ReturnType<typeof changeDialogTextAC> | ReturnType<typeof sendDialogMessageAC>
+export type ActionTypes =
+  ReturnType<typeof addPostAC>
+  | ReturnType<typeof changePostTextAC>
+  | ReturnType<typeof changeDialogTextAC>
+  | ReturnType<typeof sendDialogMessageAC>
+  | ReturnType<typeof changeFriendAC>
+  | ReturnType<typeof sendFriendAC>
 
 export type StoreType = {
   _state: StateType
@@ -48,6 +59,9 @@ export const CHANGE_POST_TEXT = 'CHANGE_POST_TEXT'
 
 export const SEND_DIALOG_MESSAGE = 'SEND_DIALOG_MESSAGE'
 export const CHANGE_DIALOG_TEXT = 'CHANGE_DIALOG_TEXT'
+
+export const SEND_FRIEND = 'SEND_FRIEND'
+export const CHANGE_FRIEND = 'CHANGE_FRIEND'
 
 
 let store: StoreType = {
@@ -81,7 +95,9 @@ let store: StoreType = {
         {id: v1(), name: 'Lesha', message: 'hello2', likes: 20, dislikes: 20},
       ],
     },
-    sidebar: ['Sveta', 'Kolya', 'Vasya'],
+    sidebar: {
+      newFriend: '',
+      friends: ['Sveta', 'Kolya', 'Vasya'],}
   },
   _getState() {
     return this._state
@@ -95,6 +111,7 @@ let store: StoreType = {
   dispatch(action) {
     this._state.profilePage = profileReducer(this._state.profilePage, action)
     this._state.dialogsPage = dialogReducer(this._state.dialogsPage, action)
+    this._state.sidebar = sidebarReducer(this._state.sidebar, action)
     this._callSubscriber()
   },
 }
