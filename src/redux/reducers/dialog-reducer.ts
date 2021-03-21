@@ -1,6 +1,28 @@
 import { ActionTypes, CHANGE_DIALOG_TEXT, DialogsPageType, SEND_DIALOG_MESSAGE } from '../store'
+import { v1 } from 'uuid'
 
-export const dialogReducer = (state: DialogsPageType, action: ActionTypes) => {
+const initialState = {
+  newDialogText: '',
+  dialogs: [
+    {
+      id: v1(),
+      name: 'Andrey',
+      messages: ['hello', 'hey', 'bye'],
+    },
+    {
+      id: v1(),
+      name: 'Vika',
+      messages: ['how are you?', 'ok'],
+    },
+    {
+      id: v1(),
+      name: 'Gosha',
+      messages: ['what\'s up'],
+    },
+  ],
+}
+
+export const dialogReducer = (state: DialogsPageType = initialState, action: ActionTypes) => {
   switch (action.type) {
     case SEND_DIALOG_MESSAGE:
       return {
