@@ -11,13 +11,13 @@ const Content = (props: AppPropsType) => {
     <div className={styles.content}>
       <Route
         path='/profile'
-        render={() => <ProfilePage store={props.store}/>}
+        render={() => <ProfilePage />}
       />
       <Route
         path='/dialogs'
         render={() => <DialogsPage store={props.store}/>}
       />
-      <Route path='/friends' render={() => <FriendsContainerPage store={props.store} />}/>
+      <Route path='/friends' render={() => <FriendsContainerPage />}/>
     </div>
   )
 }
