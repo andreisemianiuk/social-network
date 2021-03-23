@@ -4,11 +4,13 @@ import Sidebar from './Components/Sidebar/Sidebar'
 import Header from './Components/Header/Header'
 import Content from './Components/Content/Content'
 import { BrowserRouter } from 'react-router-dom'
-import { ActionTypes, StateType } from './redux/store'
+import { ActionTypes, DialogsPageType, ProfilePageType, SidebarType } from './redux/store'
+import { CombinedState, Store } from 'redux'
+
+export type StoreType = Store<CombinedState<{ dialogsPage: DialogsPageType; profilePage: ProfilePageType; sidebar: SidebarType; }>, ActionTypes>
 
 export type AppPropsType = {
-  state: StateType
-  dispatch: (action: ActionTypes) => void
+  store: StoreType
 }
 
 function App(props: AppPropsType) {
@@ -16,8 +18,8 @@ function App(props: AppPropsType) {
     <BrowserRouter>
       <div className='container'>
         <Header/>
-        <Sidebar friends={props.state.sidebar.friends}/>
-        <Content state={props.state} dispatch={props.dispatch} />
+        <Sidebar friends={props.store.getState().sidebar.friends}/>
+        <Content store={props.store} />
       </div>
     </BrowserRouter>
   )

@@ -1,18 +1,17 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
 import styles from './Posts.module.css'
 import { Post } from './Post/Post'
-import { ActionTypes, PostType } from '../../../../redux/store'
+import { PostType } from '../../../../redux/store'
 import { generateKey } from '../../../../utilities/keyCreator'
-import { addPostAC, changePostTextAC } from '../../../../redux/reducers/profile-reducer'
 
 type PostsPropsType = {
+  onChange: (value: string) => void
+  addPost: () => void
   posts: PostType[]
-  message: string
-  dispatch: (action: ActionTypes) => void
+  newPostText: string
 }
 
-export const Posts = ({posts,message,dispatch}: PostsPropsType) => {
-
+export const Posts = (props: PostsPropsType) => {
   let [error, setError] = useState<string>('')
   
   const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>)  => {
@@ -20,12 +19,12 @@ export const Posts = ({posts,message,dispatch}: PostsPropsType) => {
     if (value) {
       setError('')
     }
-    dispatch(changePostTextAC(value))
+    props.onChange(value)
   }
   const addPostHandler = () => {
-    if (message) {
-      dispatch(addPostAC())
-      dispatch(changePostTextAC(''))
+    if (props.newPostText) {
+      props.addPost()
+      props.onChange('')
     } else {
       setError('Required text')
     }
@@ -33,9 +32,9 @@ export const Posts = ({posts,message,dispatch}: PostsPropsType) => {
   const onKeyPressHandler =(e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
-      if (message) {
-        dispatch(addPostAC())
-        dispatch(changePostTextAC(''))
+      if (props.newPostText) {
+        props.addPost()
+        props.onChange('')
       } else {
         setError('Required text')
       }
@@ -47,7 +46,7 @@ export const Posts = ({posts,message,dispatch}: PostsPropsType) => {
       <h1>My Posts</h1>
       <div>
         <textarea
-          value={message}
+          value={props.newPostText}
           onChange={onChangeHandler}
           onKeyPress={onKeyPressHandler}
           className={styles.textarea}
@@ -62,7 +61,7 @@ export const Posts = ({posts,message,dispatch}: PostsPropsType) => {
           Add Post
         </button>
       </div>
-      {posts.map(v => (
+      {props.posts.map(v => (
         <Post key={generateKey(v.id)}
               id={v.id}
               name={v.name}

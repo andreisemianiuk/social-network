@@ -1,10 +1,9 @@
 import React, { ChangeEvent, useState } from 'react'
-import { ActionTypes, SidebarType } from '../../../redux/store'
-import { changeFriendAC, sendFriendAC } from '../../../redux/reducers/sidebar-reducer'
 
 type FriendsPageType = {
-  sidebar: SidebarType
-  dispatch: (action: ActionTypes) => void
+  friends: string[]
+  addFriend: (friend: string) => void
+  onChange: (value: string) => void
 }
 
 export const FriendsPage = (props: FriendsPageType) => {
@@ -13,17 +12,17 @@ export const FriendsPage = (props: FriendsPageType) => {
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.currentTarget.value
     setValue(newValue)
-    props.dispatch(changeFriendAC(newValue))
+    props.onChange(newValue)
   }
   const addFriend = () => {
-    props.dispatch(sendFriendAC(value))
+    props.addFriend(value)
     setValue('')
-    props.dispatch(changeFriendAC(value))
+    props.onChange(value)
   }
   
   return (
     <div>
-      Friends: {props.sidebar.friends.map((f,i) => <div key={`${f}-${i}`}>{f}</div>)}
+      Friends: {props.friends.map((f,i) => <div key={`${f}-${i}`}>{f}</div>)}
       <div>
         <input type={'text'} value={value} onChange={onChange}/>
         <button onClick={addFriend}>Add friend</button>

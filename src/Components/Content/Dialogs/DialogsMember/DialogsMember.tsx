@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import styles from './DialogsMember.module.css'
-import { DialogsSender } from './DialogsSender'
-import { ActionTypes } from '../../../../redux/store'
+import { StoreType } from '../../../../App'
+import { DialogsContainerSender } from './DialogsContainerSender'
 
 type DialogsMemberType = {
   id: string
   name: string
   messages: string[]
-  dispatch: (action: ActionTypes) => void
+  store: StoreType
 }
 
 export const DialogsMember: React.FC<DialogsMemberType> = (props) => {
@@ -27,7 +27,7 @@ export const DialogsMember: React.FC<DialogsMemberType> = (props) => {
       {!collapsed &&
         <div>
           {props.messages.map(m => <div>{m}</div>)}
-          <DialogsSender id={props.id} dispatch={props.dispatch}/>
+          <DialogsContainerSender id={props.id} store={props.store}/>
         </div>
       }
     </div>
