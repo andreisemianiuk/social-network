@@ -1,5 +1,18 @@
-import { ActionTypes, CHANGE_DIALOG_TEXT, DialogsPageType, SEND_DIALOG_MESSAGE } from '../store'
 import { v1 } from 'uuid'
+import { ActionTypes } from '../redux-store'
+
+export type DialogsType = {
+  id: string
+  name: string
+  messages: string[]
+}
+export type DialogsPageType = {
+  newDialogText: string
+  dialogs: DialogsType[]
+}
+
+const SEND_DIALOG_MESSAGE = 'SEND_DIALOG_MESSAGE'
+const CHANGE_DIALOG_TEXT = 'CHANGE_DIALOG_TEXT'
 
 const initialState = {
   newDialogText: '',
@@ -22,7 +35,7 @@ const initialState = {
   ],
 }
 
-export const dialogReducer = (state: DialogsPageType = initialState, action: ActionTypes) => {
+export const dialogReducer = (state: DialogsPageType = initialState, action: ActionTypes): DialogsPageType => {
   switch (action.type) {
     case SEND_DIALOG_MESSAGE:
       return {

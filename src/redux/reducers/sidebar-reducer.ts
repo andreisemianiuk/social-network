@@ -1,11 +1,19 @@
-import { ActionTypes, CHANGE_FRIEND, SEND_FRIEND, SidebarType } from '../store'
+import { ActionTypes } from '../redux-store'
 
-const initialState = {
+const SEND_FRIEND = 'SEND_FRIEND'
+const CHANGE_FRIEND = 'CHANGE_FRIEND'
+
+export type SidebarStateType = {
+  newFriend: string
+  friends: string[]
+}
+
+const initialState: SidebarStateType = {
   newFriend: '',
   friends: ['Sveta', 'Kolya', 'Vasya'],
 }
 
-export const sidebarReducer = (state: SidebarType = initialState, action: ActionTypes) => {
+export const sidebarReducer = (state: SidebarStateType = initialState, action: ActionTypes): SidebarStateType => {
   switch (action.type) {
     case SEND_FRIEND:
       return {

@@ -3,12 +3,15 @@ import styles from './Sidebar.module.css'
 import { NavLink } from 'react-router-dom'
 import { generateKey } from '../../utilities/keyCreator'
 import { Avatar } from '../../images/template/avatar'
+import { connect } from 'react-redux'
+import { AppStateType } from '../../redux/redux-store'
+import { SidebarStateType } from '../../redux/reducers/sidebar-reducer'
 
-type SidebarType = {
-  friends: string[]
+type MapStateToPropsType = {
+  sidebar: SidebarStateType
 }
 
-const Sidebar = (props: SidebarType) => {
+const Sidebar = (props: MapStateToPropsType) => {
   return (
     <nav className={styles.nav}>
       <div className={styles.link}>
@@ -21,7 +24,7 @@ const Sidebar = (props: SidebarType) => {
         <NavLink to='/friends' activeClassName={styles.active}>Friends</NavLink>
       </div>
       <div className={styles.friendsWrapper}>
-        {props.friends.map(v => (<div className={styles.friend} key={generateKey(v)}>
+        {props.sidebar.friends.map((v: React.ReactNode) => (<div className={styles.friend} key={generateKey(v)}>
           <img className={styles.img} src={Avatar} alt='ava'/>
           <div className={styles.name}>{v}</div>
         </div>))}
@@ -30,4 +33,16 @@ const Sidebar = (props: SidebarType) => {
   )
 }
 
-export default Sidebar
+const mapStateToProps = (state: AppStateType): MapStateToPropsType  => {
+  return {
+    sidebar: state.sidebar
+  }
+}
+const mapDispatchToProps = () => {
+  return {
+  }
+}
+
+const SidebarContainer = connect(mapStateToProps,mapDispatchToProps)(Sidebar)
+
+export default SidebarContainer

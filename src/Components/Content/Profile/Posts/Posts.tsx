@@ -1,15 +1,8 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
 import styles from './Posts.module.css'
 import { Post } from './Post/Post'
-import { PostType } from '../../../../redux/store'
 import { generateKey } from '../../../../utilities/keyCreator'
-
-type PostsPropsType = {
-  onChange: (value: string) => void
-  addPost: () => void
-  posts: PostType[]
-  newPostText: string
-}
+import { PostsPropsType } from './PostsContainer'
 
 export const Posts = (props: PostsPropsType) => {
   let [error, setError] = useState<string>('')
@@ -22,7 +15,7 @@ export const Posts = (props: PostsPropsType) => {
     props.onChange(value)
   }
   const addPostHandler = () => {
-    if (props.newPostText) {
+    if (props.profilePage.newPostText) {
       props.addPost()
       props.onChange('')
     } else {
@@ -32,7 +25,7 @@ export const Posts = (props: PostsPropsType) => {
   const onKeyPressHandler =(e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
-      if (props.newPostText) {
+      if (props.profilePage.newPostText) {
         props.addPost()
         props.onChange('')
       } else {
@@ -46,7 +39,7 @@ export const Posts = (props: PostsPropsType) => {
       <h1>My Posts</h1>
       <div>
         <textarea
-          value={props.newPostText}
+          value={props.profilePage.newPostText}
           onChange={onChangeHandler}
           onKeyPress={onKeyPressHandler}
           className={styles.textarea}
@@ -61,7 +54,7 @@ export const Posts = (props: PostsPropsType) => {
           Add Post
         </button>
       </div>
-      {props.posts.map(v => (
+      {props.profilePage.posts.map(v => (
         <Post key={generateKey(v.id)}
               id={v.id}
               name={v.name}

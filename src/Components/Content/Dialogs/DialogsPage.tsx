@@ -1,11 +1,10 @@
 import React from 'react'
 import styles from './DialogsPage.module.css'
 import { DialogsMember } from './DialogsMember/DialogsMember'
-import { DialogsType } from '../../../redux/store'
-import { AppPropsType } from '../../../App'
+import { DialogsPagePropsType } from './DialogsMember/DialogsContainer'
 
-export const DialogsPage = (props: AppPropsType) => {
-  const dialogs: DialogsType[] = props.store.getState().dialogsPage.dialogs
+
+export const DialogsPage = ({dialogs,onChange,sendMessage}: DialogsPagePropsType) => {
   return (
     <div className={styles.container}>
       <div className={styles.members}>
@@ -15,7 +14,8 @@ export const DialogsPage = (props: AppPropsType) => {
             name={v.name}
             id={v.id}
             messages={v.messages}
-            store={props.store}
+            onChange={onChange}
+            sendMessage={sendMessage}
           />))
         }
       </div>

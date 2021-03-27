@@ -1,5 +1,21 @@
 import { v1 } from 'uuid'
-import { ActionTypes, ADD_POST, CHANGE_POST_TEXT, ProfilePageType } from '../store'
+import { ActionTypes } from '../redux-store'
+
+export type ProfilePageType = {
+  newPostText: string
+  posts: PostType[]
+}
+export type PostType = {
+  id: string
+  name: string
+  message: string
+  likes: number
+  dislikes: number
+}
+
+const ADD_POST = 'ADD_POST'
+const CHANGE_POST_TEXT = 'CHANGE_POST_TEXT'
+
 
 const initialState = {
   newPostText: '',
@@ -10,7 +26,7 @@ const initialState = {
   ],
 }
 
-export const profileReducer = (state: ProfilePageType = initialState, action: ActionTypes) => {
+export const profileReducer = (state: ProfilePageType = initialState, action: ActionTypes): ProfilePageType => {
   switch (action.type) {
     case ADD_POST:
       const newPost = {

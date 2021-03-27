@@ -11,8 +11,8 @@ export const DialogsSender = (props: DialogsSenderType) => {
   const [value, setValue] = useState<string>('')
   
   const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    let newValue = e.currentTarget.value//?
-    setValue(newValue)//
+    const newValue = e.currentTarget.value
+    setValue(newValue)
     props.onChange(newValue)
   }
   const sendMessage = () => {

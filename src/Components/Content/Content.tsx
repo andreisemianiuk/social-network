@@ -2,22 +2,24 @@ import React from 'react'
 import styles from './Content.module.css'
 import { Route } from 'react-router-dom'
 import { ProfilePage } from './Profile/ProfilePage'
-import { DialogsPage } from './Dialogs/DialogsPage'
-import { AppPropsType } from '../../App'
 import { FriendsContainerPage } from './Friends/FriendsContainerPage'
+import { DialogsContainer } from './Dialogs/DialogsMember/DialogsContainer'
 
-const Content = (props: AppPropsType) => {
+const Content = () => {
   return (
     <div className={styles.content}>
       <Route
         path='/profile'
-        render={() => <ProfilePage />}
+        render={() => <ProfilePage/>}
       />
       <Route
         path='/dialogs'
-        render={() => <DialogsPage store={props.store}/>}
+        render={() => <DialogsContainer/>}
       />
-      <Route path='/friends' render={() => <FriendsContainerPage />}/>
+      <Route
+        path='/friends'
+        render={() => <FriendsContainerPage/>}
+      />
     </div>
   )
 }
