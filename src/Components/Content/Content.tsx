@@ -4,6 +4,8 @@ import { Route } from 'react-router-dom'
 import { ProfilePage } from './Profile/ProfilePage'
 import { FriendsContainerPage } from './Friends/FriendsContainerPage'
 import { DialogsContainer } from './Dialogs/DialogsMember/DialogsContainer'
+import { UsersPage } from './Users/UsersPage'
+import { UsersContainer } from './Users/UsersContainer'
 
 const Content = () => {
   return (
@@ -15,6 +17,10 @@ const Content = () => {
       <Route
         path='/dialogs'
         render={() => <DialogsContainer/>}
+      />
+      <Route
+        path='/users'
+        render={() => <UsersContainer/>}
       />
       <Route
         path='/friends'

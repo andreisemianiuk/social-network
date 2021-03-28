@@ -1,1 +1,1 @@
-export const imgUrl: string = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKMz56oWkccv5EZrUvir0IqZUqHVeYty6pDQ&usqp=CAU'
+export const imgUrl: string = 'https://biteable.com/content/uploads/2018/03/Background-Videos-for-Your-Homepage-SM-1200x630-c-center.jpg'

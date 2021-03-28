@@ -20,6 +20,9 @@ const Sidebar = (props: MapStateToPropsType) => {
       <div className={styles.link}>
         <NavLink to='/dialogs' activeClassName={styles.active}>Dialogs</NavLink>
       </div>
+      <div className={styles.link}>
+        <NavLink to='/users' activeClassName={styles.active}>Users</NavLink>
+      </div>
       <div className={`${styles.link} ${styles.friends}`}>
         <NavLink to='/friends' activeClassName={styles.active}>Friends</NavLink>
       </div>

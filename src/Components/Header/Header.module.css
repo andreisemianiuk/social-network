@@ -3,17 +3,11 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	background-color: lightskyblue;
 	padding-left: 35px;
 	padding-right: 200px;
 }
 
 .img {
-	width: 60px;
-}
-
-.logo {
-	font-size: 40px;
-	color: red;
-	font-weight: bold;
-	text-transform: uppercase;
+	width: 70px;
 }
