@@ -13,7 +13,9 @@ export const UsersPage = (props: UsersPagePropsType) => {
         fullName={u.fullName}
         age={u.age}
         sex={u.sex}
-        follow={u.follow}
+        isFollow={u.isFollow}
+        follow={props.follow}
+        unfollow={props.unfollow}
       />,
     )}
     </div>
