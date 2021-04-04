@@ -1,38 +1,33 @@
 import React from 'react'
 import s from './Users.module.css'
+import { UserType } from './UsersPage'
+import { Avatar } from '../../../images/template/avatar'
+//
+// type UserPropsType = {
+//   follow: (id: number) => void
+//   unfollow: (id: number) => void
+// } & UserType
 
-type UserPropsType = {
-  id: string
-  status: string
-  avatar: string
-  fullName: string
-  age: number
-  sex: string
-  isFollow: boolean
-  follow: (id: string) => void
-  unfollow: (id: string) => void
-}
-
-export const User = ({id, fullName, status, avatar, age, isFollow, sex, follow,unfollow}: UserPropsType) => {
-  const onFollowHandler = () => {
-    if (isFollow) {
-      unfollow(id)
-    } else {
-      follow(id)
-    }
-  }
+export const User = (props: UserType) => {
+  // const onFollowHandler = () => {
+  //   if (props.isFollow) {
+  //     props.unfollow(props.id)
+  //   } else {
+  //     props.follow(props.id)
+  //   }
+  // }
+  
   return (
     <div className={s.container}>
       <div className={s.leftSideContainer}>
         <div>
-          <img className={s.image} src={avatar} alt={'ava'}/>
+          <img className={s.image} src={props.photos.small ? props.photos.small : Avatar} alt={'ava'}/>
         </div>
-        <div onClick={onFollowHandler} className={s.following}>{isFollow ? 'follow' : 'unfollow'}</div>
+        {/*<div onClick={onFollowHandler} className={s.following}>{props.isFollow ? 'follow' : 'unfollow'}</div>*/}
       </div>
-      <div>{fullName}</div>
-      <div>Status: {status}</div>
-      <div>Sex: {sex}</div>
-      <div>Age: {age}</div>
+      <div className={s.fullName}>{props.name}</div>
+      <div>{props.status}</div>
+      {/*<div>{props.age}</div>*/}
     </div>
   )
 }

@@ -1,11 +1,11 @@
 .header {
 	grid-area: header;
 	display: flex;
-	justify-content: space-between;
+	/*justify-content: space-between;*/
 	align-items: center;
-	background-color: lightskyblue;
+	background-color:  aquamarine;
 	padding-left: 35px;
-	padding-right: 200px;
+	/*padding-right: 200px;*/
 }
 
 .img {

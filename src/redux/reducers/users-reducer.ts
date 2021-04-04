@@ -1,33 +1,32 @@
 import { ActionTypes } from '../redux-store'
-import { v1 } from 'uuid'
-import { Avatar } from '../../images/template/avatar'
-
-export type UserType = {
-  id: string
-  status: string
-  fullName: string
-  avatar: string
-  age: number
-  sex: string
-  isFollow: boolean
-}
-export type UsersStateType = {
-  users: UserType[]
-}
+import { UserType } from '../../Components/Content/Users/UsersPage'
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
+const SET_USERS = 'SET_USERS'
+const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
 
-const initialState: UsersStateType = {
-  users: [
-    {id: v1(), status: 'Lives Belarus!', fullName: 'Andrey', avatar: Avatar, age: 33, sex: 'male', isFollow: false},
-    {id: v1(), status: 'Lives Belarus!', fullName: 'Vika', avatar: Avatar, age: 24, sex: 'female', isFollow: false},
-    {id: v1(), status: 'Lives Belarus!', fullName: 'Gosha', avatar: Avatar, age: 32, sex: 'male', isFollow: false},
-    {id: v1(), status: 'Lives Belarus!', fullName: 'Dasha', avatar: Avatar, age: 32, sex: 'female', isFollow: false},
-  ],
+// export type UserType = {
+//   id: number
+//   status: string
+//   fullName: string
+//   avatar: string
+//   age: number
+//   sex: string
+//   isFollow: boolean
+// }
+type UsersStateType = {
+  users: UserType[]
+  totalCount: number
+}
+const initialState = {
+  users: [],
+  totalCount: 0
 }
 
-export const usersReducer = (state: UsersStateType = initialState, action: ActionTypes) => {
+// export type UsersStateType = typeof initialState
+
+export const usersReducer = (state: UsersStateType = initialState, action: ActionTypes):UsersStateType => {
   switch (action.type) {
     case FOLLOW:
       return {
@@ -39,19 +38,41 @@ export const usersReducer = (state: UsersStateType = initialState, action: Actio
         ...state,
         users: state.users.map(u => u.id === action.id ? {...u, isFollow: false} : u),
       }
+    case SET_USERS:
+      return {
+        ...state,
+        users: [...state.users, ...action.users],
+      }
+    case SET_TOTAL_COUNT:
+      return {
+        ...state,
+        totalCount: action.totalCount,
+      }
   }
   return state
 }
 
-export const followAC = (id: string) => {
+export const followAC = (id: number) => {
   return {
     type: FOLLOW,
     id,
   } as const
 }
-export const unfollowAC = (id: string) => {
+export const unfollowAC = (id: number) => {
   return {
     type: UNFOLLOW,
     id,
+  } as const
+}
+export const setUsersAC = (users: UserType[]) => {
+  return {
+    type: SET_USERS,
+    users,
+  } as const
+}
+export const setTotalCountAC = (totalCount: number) => {
+  return {
+    type: SET_TOTAL_COUNT,
+    totalCount
   } as const
 }

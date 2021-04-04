@@ -8,10 +8,11 @@
 	font-weight: bolder;
 	text-transform: uppercase;
 	text-decoration: none;
+	color: white;
 }
 
 .active {
-	color: crimson;
+	color: orange !important;
 }
 
 .sendIcon {
