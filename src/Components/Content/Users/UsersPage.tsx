@@ -25,13 +25,13 @@ export const UsersPage = (props: UsersPagePropsType) => {
   if (!props.users.length) {
     axios.get<GetUsersResponseType>('https://social-network.samuraijs.com/api/1.0/users').then(response => {debugger
       props.setUsers(response.data.items)
-      props.setTotalCount(response.data.totalCount)
+      props.setTotalUsersCount(response.data.totalCount)
     })
   }
   
   return (
     <div>
-      <span>{props.totalCount}</span>
+      <span>{props.totalUsersCount}</span>
       {props.users.map(u =>
         <User
           key={u.id}
@@ -40,8 +40,8 @@ export const UsersPage = (props: UsersPagePropsType) => {
           photos={u.photos}
           status={u.status}
           followed={u.followed}
-          // follow={props.follow}
-          // unfollow={props.unfollow}
+          follow={props.follow}
+          unfollow={props.unfollow}
         />,
       )}
     </div>

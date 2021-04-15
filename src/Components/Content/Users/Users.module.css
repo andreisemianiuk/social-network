@@ -9,12 +9,14 @@
 	border: 3px solid whitesmoke;
 	border-radius: 10px;
 }
+
 .leftSideContainer {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	width: 80px;
 }
+
 .image {
 	width: 50px;
 	height: 50px;
@@ -34,8 +36,15 @@
 	background-color: coral;
 	cursor: pointer;
 }
+
 .fullName {
 	font-style: oblique;
 	font-size: 25px;
 	font-weight: bold;
+}
+
+.selected {
+	font-size: 1.2em;
+	font-weight: bold;
+	color: firebrick;
 }

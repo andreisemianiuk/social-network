@@ -2,6 +2,7 @@ import React from 'react'
 import { User } from './User'
 import { UsersPagePropsType } from './UsersContainer'
 import axios from 'axios'
+import styles from './Users.module.css'
 
 export type UserType = {
   id: number
@@ -20,19 +21,41 @@ export type GetUsersResponseType = {
 }
 
 export class UsersPageClass extends React.Component<UsersPagePropsType> {
-
   componentDidMount() {
-    axios.get<GetUsersResponseType>('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+    axios.get<GetUsersResponseType>(`https://social-network.samuraijs.com/api/1.0/users`).then(response => {
       this.props.setUsers(response.data.items)
-      this.props.setTotalCount(response.data.totalCount)
+      this.props.setTotalUsersCount(response.data.totalCount)
+    })
+  }
+  
+  changeCurrentPage = (page: number) => {
+    this.props.setCurrentPage(page)
+    axios.get<GetUsersResponseType>(
+      `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,
+    ).then(response => {
+      this.props.setUsers(response.data.items)
     })
   }
   
   render() {
+    
+    const countOfPages: number = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+    let pages = []
+    for (let i = 1; i <= countOfPages; i++) {
+      pages.push(i)
+    }
+    
     return (
       <div>
-        <div>Total users: {this.props.totalCount}</div>
-        {/*<button onClick={this.getUsers}>GetUsers</button>*/}
+        <div>{pages.map(v =>
+          <span
+            onClick={() => this.changeCurrentPage(v)}
+            className={this.props.currentPage === v ? styles.selected : ''}
+          >
+            {v}
+          </span>).slice(0, 20)
+        }
+        </div>
         {this.props.users.map(u =>
           <User
             key={u.id}
@@ -41,8 +64,8 @@ export class UsersPageClass extends React.Component<UsersPagePropsType> {
             photos={u.photos}
             status={u.status}
             followed={u.followed}
-            // follow={props.follow}
-            // unfollow={props.unfollow}
+            follow={this.props.follow}
+            unfollow={this.props.unfollow}
           />,
         )}
       </div>
