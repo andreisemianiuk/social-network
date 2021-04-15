@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom'
 import { ProfilePage } from './Profile/ProfilePage'
 import { FriendsContainerPage } from './Friends/FriendsContainerPage'
 import { DialogsContainer } from './Dialogs/DialogsMember/DialogsContainer'
-import { UsersContainer } from './Users/UsersContainer'
+import UsersContainer from './Users/UsersContainer'
 
 const Content = () => {
   return (
