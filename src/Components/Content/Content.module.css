@@ -1,6 +1,6 @@
 .content {
 	grid-area: content;
-	height: 100vh;
+	min-height: 100vh;
 	background-image: url("https://biteable.com/content/uploads/2018/03/Background-Videos-for-Your-Homepage-SM-1200x630-c-center.jpg");
 	background-size: cover;
 }

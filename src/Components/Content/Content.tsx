@@ -10,7 +10,7 @@ const Content = () => {
   return (
     <div className={styles.content}>
       <Route
-        path='/profile'
+        path='/profile/:userId?'
         render={() => <ProfilePage/>}
       />
       <Route
