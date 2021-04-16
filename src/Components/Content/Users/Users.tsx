@@ -22,7 +22,7 @@ export const Users = (props: UsersPropsType) => {
       <div>{pages.map(v =>
         <span
           onClick={() => props.changeCurrentPage(v)}
-          className={props.currentPage === v ? styles.selected : ''}
+          className={`${styles.page} ${props.currentPage === v ? styles.selected : ''}`}
         >
             {v}
           </span>).slice(0, 20)

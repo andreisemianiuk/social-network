@@ -23,6 +23,21 @@
 	border-radius: 50%;
 }
 
+.page {
+	margin: 5px;
+	cursor: pointer;
+}
+
+.page:hover {
+	color: lightslategrey;
+}
+
+.selected {
+	font-size: 1.2em;
+	font-weight: bold;
+	color: firebrick;
+}
+
 .preloader {
 	display: flex;
 	justify-content: center;
@@ -43,8 +58,3 @@
 	font-weight: bold;
 }
 
-.selected {
-	font-size: 1.2em;
-	font-weight: bold;
-	color: firebrick;
-}
