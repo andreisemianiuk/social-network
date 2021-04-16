@@ -2,6 +2,7 @@ import React from 'react'
 import s from './Users.module.css'
 import { UserType } from './UsersPage'
 import { Avatar } from '../../../images/template/avatar'
+import { NavLink } from 'react-router-dom'
 
 type UserPropsType = {
   follow: (id: number) => void
@@ -21,7 +22,10 @@ export const User = (props: UserPropsType) => {
     <div className={s.container}>
       <div className={s.leftSideContainer}>
         <div>
-          <img className={s.image} src={props.photos.small ? props.photos.small : Avatar} alt={'ava'}/>
+          <NavLink to={`/profile/${props.id}?`}>
+            <img className={s.image} src={props.photos.small ? props.photos.small : Avatar}
+                 alt={'ava'}/>
+          </NavLink>
         </div>
         <div onClick={onFollowHandler} className={s.following}>{props.followed ? 'follow' : 'unfollow'}</div>
       </div>

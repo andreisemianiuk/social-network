@@ -77,22 +77,13 @@ type MapStateToProps = {
   pageSize: number
   isFetching: boolean
 }
-
 type MapDispatchToProps =
   {
     follow: (id: number) => void
-    unfollow
-      :
-      (id: number) => void
-    setUsers
-      :
-      (items: UserType[]) => void
-    setTotalUsersCount
-      :
-      (totalCount: number) => void
-    setCurrentPage
-      :
-      (page: number) => void
+    unfollow: (id: number) => void
+    setUsers: (items: UserType[]) => void
+    setTotalUsersCount: (totalCount: number) => void
+    setCurrentPage: (page: number) => void
     toggleFetching: (isFetching: boolean) => void
   }
 export type UsersPagePropsType = MapStateToProps & MapDispatchToProps
@@ -106,32 +97,9 @@ const mapStateToProps = (state: AppStateType): MapStateToProps => {
     isFetching: state.usersPage.isFetching,
   }
 }
-// const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
-//   return {
-//     follow: (id: number) => {
-//       dispatch(follow(id))
-//     },
-//     unfollow: (id: number) => {
-//       dispatch(unfollow(id))
-//     },
-//     setUsers: (users: UserType[]) => {
-//       dispatch(setUsers(users))
-//     },
-//     setTotalUsersCount: (totalCount: number) => {
-//       dispatch(setTotalUsersCount(totalCount))
-//     },
-//     setCurrentPage: (page: number) => {
-//       dispatch(setCurrentPage(page))
-//     },
-//     toggleFetching: (isFetching: boolean) => {
-//       dispatch(toggleFetching(isFetching))
-//     },
-//   }
-// }
 
-export default connect
-< MapStateToProps,
-MapDispatchToProps, {}, AppStateType > (mapStateToProps,
+export default connect<MapStateToProps, MapDispatchToProps, {}, AppStateType>(
+  mapStateToProps,
   {
     follow,
     unfollow,
@@ -139,5 +107,5 @@ MapDispatchToProps, {}, AppStateType > (mapStateToProps,
     setTotalUsersCount,
     setCurrentPage,
     toggleFetching,
-  })
-(UsersContainer)
+  },
+)(UsersContainer)
