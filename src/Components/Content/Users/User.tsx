@@ -3,6 +3,8 @@ import s from './Users.module.css'
 import { UserType } from './UsersPage'
 import { Avatar } from '../../../images/template/avatar'
 import { NavLink } from 'react-router-dom'
+import axios from 'axios'
+import { AuthStateType } from '../../../redux/reducers/auth-reducer'
 
 type UserPropsType = {
   follow: (id: number) => void
@@ -10,11 +12,22 @@ type UserPropsType = {
 } & UserType
 
 export const User = (props: UserPropsType) => {
+  
   const onFollowHandler = () => {
     if (props.followed) {
-      props.unfollow(props.id)
-    } else {
-      props.follow(props.id)
+      axios.delete<AuthStateType>(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`,
+        {withCredentials: true, headers: {'API-KEY': '7b4001e9-c455-4bb5-8814-d09f26458311'}}).then(response => {
+        if (response.data.resultCode === 0) {
+          props.unfollow(props.id)
+        }
+      })
+    } else if (!props.followed) {
+      axios.post<AuthStateType>(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`, {},
+        {withCredentials: true, headers: {'API-KEY': '7b4001e9-c455-4bb5-8814-d09f26458311'}}).then(response => {
+        if (response.data.resultCode === 0) {
+          props.follow(props.id)
+        }
+      })
     }
   }
   
@@ -27,7 +40,7 @@ export const User = (props: UserPropsType) => {
                  alt={'ava'}/>
           </NavLink>
         </div>
-        <div onClick={onFollowHandler} className={s.following}>{props.followed ? 'follow' : 'unfollow'}</div>
+        <div onClick={onFollowHandler} className={s.following}>{!props.followed ? 'follow' : 'unfollow'}</div>
       </div>
       <div className={s.fullName}>{props.name}</div>
       <div>{props.status}</div>

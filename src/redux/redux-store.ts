@@ -3,6 +3,7 @@ import { changeDialogTextAC, dialogReducer, sendDialogMessageAC } from './reduce
 import { profileReducer } from './reducers/profile-reducer'
 import { changeFriendAC, sendFriendAC, sidebarReducer } from './reducers/sidebar-reducer'
 import { usersReducer } from './reducers/users-reducer'
+import { authReducer } from './reducers/auth-reducer'
 
 export type ActionTypes =
   | ReturnType<typeof changeDialogTextAC>
@@ -15,6 +16,7 @@ export const rootReducer = combineReducers({
   profilePage: profileReducer,
   usersPage: usersReducer,
   sidebar: sidebarReducer,
+  auth: authReducer
 })
 
 export type AppStateType = ReturnType<typeof rootReducer>

@@ -19,7 +19,8 @@ class ProfileInfoContainer extends React.Component<PropsType> {
     if (!userId) {
       userId = '2'
     }
-    axios.get<ProfileUserType>(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then(
+    axios.get<ProfileUserType>(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`,
+      {withCredentials: true}).then(
       response => {
         this.props.setProfile(response.data)
       })

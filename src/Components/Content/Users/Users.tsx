@@ -2,6 +2,7 @@ import React from 'react'
 import { User } from './User'
 import styles from './Users.module.css'
 import { UsersStateType } from '../../../redux/reducers/users-reducer'
+import { Preloader } from '../../../common/Preloader/Preloader'
 
 type UsersPropsType = {
   changeCurrentPage: (value: number) => void
@@ -19,15 +20,19 @@ export const Users = (props: UsersPropsType) => {
   
   return (
     <div>
-      <div>{pages.map(v =>
-        <span
-          onClick={() => props.changeCurrentPage(v)}
-          className={`${styles.page} ${props.currentPage === v ? styles.selected : ''}`}
-        >
+      {props.isFetching
+        ?
+        <Preloader/>
+        :
+        <div>{pages.map(v =>
+          <span
+            onClick={() => props.changeCurrentPage(v)}
+            className={`${styles.page} ${props.currentPage === v ? styles.selected : ''}`}
+          >
             {v}
           </span>).slice(0, 20)
-      }
-      </div>
+        }
+        </div>}
       {props.users.map(u =>
         <User
           key={u.id}
