@@ -3,8 +3,8 @@ import s from './Users.module.css'
 import { UserType } from './UsersPage'
 import { Avatar } from '../../../images/template/avatar'
 import { NavLink } from 'react-router-dom'
-import axios from 'axios'
 import { AuthStateType } from '../../../redux/reducers/auth-reducer'
+import { FollowingAPI } from '../../../api/Api'
 
 type UserPropsType = {
   follow: (id: number) => void
@@ -15,16 +15,14 @@ export const User = (props: UserPropsType) => {
   
   const onFollowHandler = () => {
     if (props.followed) {
-      axios.delete<AuthStateType>(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`,
-        {withCredentials: true, headers: {'API-KEY': '7b4001e9-c455-4bb5-8814-d09f26458311'}}).then(response => {
-        if (response.data.resultCode === 0) {
+      FollowingAPI.unfollow(props.id).then(data => {
+        if (data.resultCode === 0) {
           props.unfollow(props.id)
         }
       })
     } else if (!props.followed) {
-      axios.post<AuthStateType>(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`, {},
-        {withCredentials: true, headers: {'API-KEY': '7b4001e9-c455-4bb5-8814-d09f26458311'}}).then(response => {
-        if (response.data.resultCode === 0) {
+      FollowingAPI.follow(props.id).then(data => {
+        if (data.resultCode === 0) {
           props.follow(props.id)
         }
       })

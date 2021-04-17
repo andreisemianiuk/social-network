@@ -2,6 +2,7 @@ import React from 'react'
 import { User } from './User'
 import { UsersPagePropsType } from './UsersContainer'
 import axios from 'axios'
+import { UsersAPI } from '../../../api/Api'
 
 export type UserType = {
   id: number
@@ -23,7 +24,8 @@ export type GetUsersResponseType = {
 export const UsersPage = (props: UsersPagePropsType) => {
   
   if (!props.users.length) {
-    axios.get<GetUsersResponseType>('https://social-network.samuraijs.com/api/1.0/users').then(response => {debugger
+    // UsersAPI.getUsers() need to refactor!!!
+    axios.get<GetUsersResponseType>('https://social-network.samuraijs.com/api/1.0/users').then(response => {
       props.setUsers(response.data.items)
       props.setTotalUsersCount(response.data.totalCount)
     })
