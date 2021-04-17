@@ -2,19 +2,17 @@ import React from 'react'
 import { User } from './User'
 import { UsersPagePropsType } from './UsersContainer'
 import axios from 'axios'
-import { UsersAPI } from '../../../api/Api'
 
 export type UserType = {
   id: number
   name: string
   status: string
   photos: {
-    small:string
+    small: string
     large: string
   }
   followed: boolean
 }
-
 export type GetUsersResponseType = {
   items: UserType[]
   totalCount: number
@@ -44,6 +42,8 @@ export const UsersPage = (props: UsersPagePropsType) => {
           followed={u.followed}
           follow={props.follow}
           unfollow={props.unfollow}
+          inFollowingProgress={props.inFollowingProgress}
+          toggleFollowingProgress={props.toggleFollowingProgress}
         />,
       )}
     </div>

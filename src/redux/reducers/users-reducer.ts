@@ -6,6 +6,7 @@ const SET_USERS = 'SET_USERS'
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
+const TOGGLE_FOLLOWING_PROGRESS = 'TOGGLE_FOLLOWING_PROGRESS'
 
 export type UsersStateType = {
   users: UserType[]
@@ -13,6 +14,7 @@ export type UsersStateType = {
   currentPage: number
   pageSize: number
   isFetching: boolean
+  inFollowingProgress: number[]
 }
 const initialState: UsersStateType = {
   users: [],
@@ -20,6 +22,7 @@ const initialState: UsersStateType = {
   currentPage: 1,
   pageSize: 20,
   isFetching: false,
+  inFollowingProgress: [],
 }
 
 export const usersReducer = (state: UsersStateType = initialState, action: ActionTypes): UsersStateType => {
@@ -54,6 +57,13 @@ export const usersReducer = (state: UsersStateType = initialState, action: Actio
         ...state,
         isFetching: action.isFetching,
       }
+    case TOGGLE_FOLLOWING_PROGRESS:
+      return {
+        ...state,
+        inFollowingProgress: action.inProgress
+          ? [...state.inFollowingProgress, action.userId]
+          : state.inFollowingProgress.filter(id => id !== action.userId),
+      }
   }
   return state
 }
@@ -65,6 +75,7 @@ type ActionTypes =
   | ReturnType<typeof setTotalUsersCount>
   | ReturnType<typeof setCurrentPage>
   | ReturnType<typeof toggleFetching>
+  | ReturnType<typeof toggleFollowingProgress>
 
 
 export const follow = (id: number) => {
@@ -101,5 +112,12 @@ export const toggleFetching = (isFetching: boolean) => {
   return {
     type: TOGGLE_FETCHING,
     isFetching,
+  } as const
+}
+export const toggleFollowingProgress = (inProgress: boolean, userId: number) => {
+  return {
+    type: TOGGLE_FOLLOWING_PROGRESS,
+    inProgress,
+    userId,
   } as const
 }

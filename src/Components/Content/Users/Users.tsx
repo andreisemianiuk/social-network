@@ -8,6 +8,7 @@ type UsersPropsType = {
   changeCurrentPage: (value: number) => void
   follow: (id: number) => void
   unfollow: (id: number) => void
+  toggleFollowingProgress: (inProgress: boolean, userId: number) => void
 } & UsersStateType
 
 
@@ -43,6 +44,8 @@ export const Users = (props: UsersPropsType) => {
           followed={u.followed}
           follow={props.follow}
           unfollow={props.unfollow}
+          inFollowingProgress={props.inFollowingProgress}
+          toggleFollowingProgress={props.toggleFollowingProgress}
         />,
       )}
     </div>

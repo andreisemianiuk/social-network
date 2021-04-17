@@ -43,13 +43,18 @@
 	justify-content: center;
 }
 
-.following {
+.followingBtn {
 	width: 70px;
 	text-align: center;
 	padding: 3px;
 	border-radius: 10px;
 	background-color: coral;
 	cursor: pointer;
+	outline: none;
+}
+
+.followingBtn:hover {
+	background-color: chartreuse;
 }
 
 .fullName {
