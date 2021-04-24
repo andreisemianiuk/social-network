@@ -1,3 +1,6 @@
+import { ThunkAction } from 'redux-thunk'
+import { AuthAPI } from '../../api/Api'
+
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
 
 export type AuthDataType = {
@@ -43,5 +46,10 @@ export const setAuthUser = (data: AuthDataType) => {
   } as const
 }
 
+type AuthThunkType = ThunkAction<void, AuthStateType, unknown, ActionTypes>
 
-export default {}
+export const getAuthTC = ():AuthThunkType => (dispatch) => {
+  AuthAPI.me().then(data => {
+    dispatch(setAuthUser(data))
+  })
+}

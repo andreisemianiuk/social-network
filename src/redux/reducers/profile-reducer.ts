@@ -1,4 +1,6 @@
 import { v1 } from 'uuid'
+import { ThunkAction } from 'redux-thunk'
+import { ProfileAPI } from '../../api/Api'
 
 export type ProfilePageType = {
   newPostText: string
@@ -48,7 +50,7 @@ const initialState: ProfilePageType = {
     {id: v1(), name: 'Vera', message: 'hello1', likes: 10, dislikes: 12},
     {id: v1(), name: 'Lesha', message: 'hello2', likes: 20, dislikes: 20},
   ],
-  profile: null
+  profile: null,
 }
 
 // profile: {
@@ -120,4 +122,12 @@ export const setProfile = (profile: ProfileUserType) => {
     type: SET_PROFILE,
     profile,
   } as const
+}
+
+type ProfileThunkType = ThunkAction<void, ProfilePageType, unknown, ActionTypes>
+
+export const getProfileTC = (userId: string): ProfileThunkType => (dispatch) => {
+  ProfileAPI.getProfile(userId).then(data => {
+    dispatch(setProfile(data))
+  })
 }

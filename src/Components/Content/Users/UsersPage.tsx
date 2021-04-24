@@ -41,7 +41,9 @@ export const UsersPage = (props: UsersPagePropsType) => {
           status={u.status}
           followed={u.followed}
           follow={props.follow}
+          followTC={props.followTC}
           unfollow={props.unfollow}
+          unfollowTC={props.unfollowTC}
           inFollowingProgress={props.inFollowingProgress}
           toggleFollowingProgress={props.toggleFollowingProgress}
         />,

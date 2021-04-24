@@ -33,7 +33,7 @@ export const AuthAPI = {
   me() {
     return customInstance.get<AuthStateType>(`auth/me`).then(
       response => {
-        return response.data
+        return response.data.data
       },
     )
   },

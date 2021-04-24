@@ -1,9 +1,10 @@
-import { combineReducers, createStore } from 'redux'
+import { applyMiddleware, combineReducers, createStore } from 'redux'
 import { changeDialogTextAC, dialogReducer, sendDialogMessageAC } from './reducers/dialog-reducer'
 import { profileReducer } from './reducers/profile-reducer'
 import { changeFriendAC, sendFriendAC, sidebarReducer } from './reducers/sidebar-reducer'
 import { usersReducer } from './reducers/users-reducer'
 import { authReducer } from './reducers/auth-reducer'
+import thunk from 'redux-thunk'
 
 export type ActionTypes =
   | ReturnType<typeof changeDialogTextAC>
@@ -21,7 +22,7 @@ export const rootReducer = combineReducers({
 
 export type AppStateType = ReturnType<typeof rootReducer>
 
-export const store = createStore(rootReducer)
+export const store = createStore(rootReducer,applyMiddleware(thunk))
 
 // @ts-ignore
 window.store = store

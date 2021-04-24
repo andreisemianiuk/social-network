@@ -1,4 +1,6 @@
 import { UserType } from '../../Components/Content/Users/UsersPage'
+import { ThunkAction } from 'redux-thunk'
+import { FollowingAPI, UsersAPI } from '../../api/Api'
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
@@ -120,4 +122,43 @@ export const toggleFollowingProgress = (inProgress: boolean, userId: number) => 
     inProgress,
     userId,
   } as const
+}
+
+type UsersThunkType = ThunkAction<void, UsersStateType, unknown, ActionTypes>
+
+export const getUsersTC = (currentPage: number, pageSize: number): UsersThunkType =>
+  (dispatch) => {
+    dispatch(toggleFetching(true))
+    UsersAPI.getUsers(currentPage, pageSize).then(data => {
+      dispatch(toggleFetching(false))
+      dispatch(setUsers(data.items))
+      dispatch(setTotalUsersCount(data.totalCount))
+    })
+  }
+export const changeCurrentPageTC = (page: number, pageSize: number): UsersThunkType =>
+  (dispatch) => {
+    dispatch(toggleFetching(true))
+    dispatch(setCurrentPage(page))
+    UsersAPI.getUsers(page, pageSize).then(data => {
+      dispatch(toggleFetching(false))
+      dispatch(setUsers(data.items))
+    })
+  }
+export const unfollowTC = (id: number):UsersThunkType => (dispatch) => {
+  dispatch(toggleFollowingProgress(true, id))
+  FollowingAPI.unfollow(id).then(data => {
+    if (data.resultCode === 0) {
+      dispatch(unfollow(id))
+    }
+    dispatch(toggleFollowingProgress(false, id))
+  })
+}
+export const followTC = (id: number):UsersThunkType => (dispatch) => {
+  dispatch(toggleFollowingProgress(true, id))
+  FollowingAPI.follow(id).then(data => {
+    if (data.resultCode === 0) {
+      dispatch(follow(id))
+    }
+    dispatch(toggleFollowingProgress(false, id))
+  })
 }
