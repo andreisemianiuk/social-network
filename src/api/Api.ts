@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { GetUsersResponseType } from '../Components/Content/Users/UsersContainer'
 import { ProfileUserType } from '../redux/reducers/profile-reducer'
-import { AuthStateType } from '../redux/reducers/auth-reducer'
+import { AuthStateType, ResponseAuthType } from '../redux/reducers/auth-reducer'
 
 const customInstance = axios.create({
   baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -31,9 +31,9 @@ export const ProfileAPI = {
 
 export const AuthAPI = {
   me() {
-    return customInstance.get<AuthStateType>(`auth/me`).then(
+    return customInstance.get<ResponseAuthType>(`auth/me`).then(
       response => {
-        return response.data.data
+        return response.data
       },
     )
   },
@@ -41,14 +41,14 @@ export const AuthAPI = {
 
 export const FollowingAPI = {
   follow(userId: number) {
-    return customInstance.post<AuthStateType>(`follow/${userId}`).then(
+    return customInstance.post<ResponseAuthType>(`follow/${userId}`).then(
       response => {
         return response.data
       },
     )
   },
   unfollow(userId: number) {
-    return customInstance.delete<AuthStateType>(`follow/${userId}`).then(
+    return customInstance.delete<ResponseAuthType>(`follow/${userId}`).then(
       response => {
         return response.data
       },

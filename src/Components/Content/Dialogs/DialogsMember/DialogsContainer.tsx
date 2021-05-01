@@ -12,6 +12,7 @@ import { DialogsPage } from '../DialogsPage'
 type MapStateToPropsType = {
   newDialogText: string
   dialogs: DialogsType[]
+  isAuth: boolean
 }
 type MapDispatchToPropsType = {
   onChange: (value: string) => void
@@ -23,7 +24,8 @@ export type DialogsPagePropsType = MapStateToPropsType & MapDispatchToPropsType
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
   return {
     newDialogText: state.dialogsPage.newDialogText,
-    dialogs: state.dialogsPage.dialogs
+    dialogs: state.dialogsPage.dialogs,
+    isAuth: state.auth.isAuth
   }
 }
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {

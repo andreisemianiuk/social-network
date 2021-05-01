@@ -2,7 +2,7 @@ import React from 'react'
 import { Login } from './Login'
 import { connect } from 'react-redux'
 import { AppStateType } from '../../redux/redux-store'
-import { AuthDataType, AuthStateType, getAuthTC, setAuthUser } from '../../redux/reducers/auth-reducer'
+import { AuthStateType, getAuthTC, setAuthUser } from '../../redux/reducers/auth-reducer'
 
 class LoginContainer extends React.Component<PropsType, AppStateType> {
   componentDidMount() {
@@ -11,7 +11,7 @@ class LoginContainer extends React.Component<PropsType, AppStateType> {
   
   render() {
     return (
-      <Login data={this.props.auth.data}/>
+      <Login data={this.props.auth}/>
     )
   }
 }
@@ -20,7 +20,7 @@ type MapStateToPropsType = {
   auth: AuthStateType
 }
 type MapDispatchToPropsType = {
-  setAuthUser: (data: AuthDataType) => void
+  setAuthUser: (data: AuthStateType) => void
   getAuth: () => void
   // setProfile: (profile: ProfileUserType) => void
 }

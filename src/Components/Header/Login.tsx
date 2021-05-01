@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './Header.module.css'
-import { AuthDataType } from '../../redux/reducers/auth-reducer'
+import { AuthStateType } from '../../redux/reducers/auth-reducer'
 
 type LoginPropsType = {
-  data: AuthDataType
+  data: AuthStateType
 }
 
 export const Login = (props: LoginPropsType) => {

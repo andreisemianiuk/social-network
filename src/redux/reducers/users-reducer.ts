@@ -144,7 +144,7 @@ export const changeCurrentPageTC = (page: number, pageSize: number): UsersThunkT
       dispatch(setUsers(data.items))
     })
   }
-export const unfollowTC = (id: number):UsersThunkType => (dispatch) => {
+export const unfollowTC = (id: number): UsersThunkType => (dispatch) => {
   dispatch(toggleFollowingProgress(true, id))
   FollowingAPI.unfollow(id).then(data => {
     if (data.resultCode === 0) {
@@ -153,7 +153,7 @@ export const unfollowTC = (id: number):UsersThunkType => (dispatch) => {
     dispatch(toggleFollowingProgress(false, id))
   })
 }
-export const followTC = (id: number):UsersThunkType => (dispatch) => {
+export const followTC = (id: number): UsersThunkType => (dispatch) => {
   dispatch(toggleFollowingProgress(true, id))
   FollowingAPI.follow(id).then(data => {
     if (data.resultCode === 0) {

@@ -5,25 +5,30 @@ import { ProfilePage } from './Profile/ProfilePage'
 import { FriendsContainerPage } from './Friends/FriendsContainerPage'
 import { DialogsContainer } from './Dialogs/DialogsMember/DialogsContainer'
 import UsersContainer from './Users/UsersContainer'
+import { Login } from '../Login/Login'
 
 const Content = () => {
   return (
     <div className={styles.content}>
       <Route
-        path='/profile/:userId?'
+        path="/profile/:userId?"
         render={() => <ProfilePage/>}
       />
       <Route
-        path='/dialogs'
+        path="/dialogs"
         render={() => <DialogsContainer/>}
       />
       <Route
-        path='/users'
+        path="/users"
         render={() => <UsersContainer/>}
       />
       <Route
-        path='/friends'
+        path="/friends"
         render={() => <FriendsContainerPage/>}
+      />
+      <Route
+        path="/login"
+        render={() => <Login/>}
       />
     </div>
   )
