@@ -10,7 +10,7 @@ import {
 } from '../../../redux/reducers/users-reducer'
 import { AppStateType } from '../../../redux/redux-store'
 import { Users } from './Users'
-import { Redirect } from 'react-router-dom'
+import { withAuthRedirect } from '../../../hoc/withAuthRedirect'
 
 export type UserType = {
   id: number
@@ -38,7 +38,6 @@ class UsersContainer extends React.Component<UsersPagePropsType> {
   }
   
   render() {
-    if (!this.props.isAuth) return <Redirect to={'login'}/>
     return (
       <>
         <Users
@@ -68,7 +67,6 @@ type MapStateToProps = {
   pageSize: number
   isFetching: boolean
   inFollowingProgress: number[]
-  isAuth: boolean
 }
 type MapDispatchToProps =
   {
@@ -94,11 +92,10 @@ const mapStateToProps = (state: AppStateType): MapStateToProps => {
     pageSize: state.usersPage.pageSize,
     isFetching: state.usersPage.isFetching,
     inFollowingProgress: state.usersPage.inFollowingProgress,
-    isAuth: state.auth.isAuth,
   }
 }
 
-export default connect<MapStateToProps, MapDispatchToProps, {}, AppStateType>(
+export default withAuthRedirect(connect<MapStateToProps, MapDispatchToProps, {}, AppStateType>(
   mapStateToProps,
   {
     follow,
@@ -113,4 +110,4 @@ export default connect<MapStateToProps, MapDispatchToProps, {}, AppStateType>(
     followTC,
     unfollowTC,
   },
-)(UsersContainer)
+)(UsersContainer))
