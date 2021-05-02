@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ComponentType } from 'react'
 import { ProfileInfo } from './ProfileInfo'
 import { AppStateType } from '../../../../redux/redux-store'
 import { connect } from 'react-redux'
@@ -6,6 +6,7 @@ import { getProfileTC, ProfileUserType, setProfile } from '../../../../redux/red
 import { Preloader } from '../../../../common/Preloader/Preloader'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { withAuthRedirect } from '../../../../hoc/withAuthRedirect'
+import { compose } from 'redux'
 
 export type PathParamsType = {
   userId: string | undefined,
@@ -51,10 +52,13 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
   }
 }
 
-export default withAuthRedirect(connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(
-  mapStateToProps,
-  {
-    setProfile,
-    getProfile: getProfileTC,
-  },
-)(withRouter(ProfileInfoContainer)))
+export default compose<ComponentType>(
+  connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(
+    mapStateToProps,
+    {
+      setProfile,
+      getProfile: getProfileTC,
+    }),
+  withRouter,
+  withAuthRedirect,
+)(ProfileInfoContainer)

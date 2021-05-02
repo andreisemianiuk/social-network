@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ComponentType } from 'react'
 import { connect } from 'react-redux'
 import {
   changeCurrentPageTC,
@@ -11,6 +11,7 @@ import {
 import { AppStateType } from '../../../redux/redux-store'
 import { Users } from './Users'
 import { withAuthRedirect } from '../../../hoc/withAuthRedirect'
+import { compose } from 'redux'
 
 export type UserType = {
   id: number
@@ -95,19 +96,21 @@ const mapStateToProps = (state: AppStateType): MapStateToProps => {
   }
 }
 
-export default withAuthRedirect(connect<MapStateToProps, MapDispatchToProps, {}, AppStateType>(
-  mapStateToProps,
-  {
-    follow,
-    unfollow,
-    setUsers,
-    setTotalUsersCount,
-    setCurrentPage,
-    toggleFetching,
-    toggleFollowingProgress,
-    getUsers: getUsersTC,
-    changeCurrentPage: changeCurrentPageTC,
-    followTC,
-    unfollowTC,
-  },
-)(UsersContainer))
+export default compose<ComponentType>(
+  connect<MapStateToProps, MapDispatchToProps, {}, AppStateType>(
+    mapStateToProps,
+    {
+      follow,
+      unfollow,
+      setUsers,
+      setTotalUsersCount,
+      setCurrentPage,
+      toggleFetching,
+      toggleFollowingProgress,
+      getUsers: getUsersTC,
+      changeCurrentPage: changeCurrentPageTC,
+      followTC,
+      unfollowTC,
+    },
+  ),
+  withAuthRedirect)(UsersContainer)

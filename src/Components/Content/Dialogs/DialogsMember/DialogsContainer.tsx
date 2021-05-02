@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ComponentType } from 'react'
 import {
   changeDialogTextAC,
   DialogsType,
@@ -6,7 +6,7 @@ import {
 } from '../../../../redux/reducers/dialog-reducer'
 import { AppStateType } from '../../../../redux/redux-store'
 import { connect } from 'react-redux'
-import { Dispatch } from 'redux'
+import { compose, Dispatch } from 'redux'
 import { DialogsPage } from '../DialogsPage'
 import { withAuthRedirect } from '../../../../hoc/withAuthRedirect'
 
@@ -39,4 +39,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
   }
 }
 
-export const DialogsContainer = withAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(DialogsPage))
+export const DialogsContainer = compose<ComponentType>(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthRedirect,
+)(DialogsPage)
