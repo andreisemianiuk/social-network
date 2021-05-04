@@ -4,6 +4,7 @@ import { ProfileUserType } from '../../../../redux/reducers/profile-reducer'
 import up from '../../../../images/template/like.png'
 import down from '../../../../images/template/thumbs-down.png'
 import { Avatar } from '../../../../images/template/avatar'
+import { ProfileStatus } from './ProfileStatus'
 
 
 type ProfileInfoPropsType = {
@@ -20,6 +21,7 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
           <img className={styles.photo} src={photos.small ? photos.small : Avatar} alt={'ava'}/>
         </div>
         <div className={styles.name}>{fullName}</div>
+        <ProfileStatus/>
       </div>
       <div className={styles.jobBlock}>
         <div>
