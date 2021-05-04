@@ -3,9 +3,9 @@ import styles from './Content.module.css'
 import { Route } from 'react-router-dom'
 import { ProfilePage } from './Profile/ProfilePage'
 import { FriendsContainerPage } from './Friends/FriendsContainerPage'
-import { DialogsContainer } from './Dialogs/DialogsMember/DialogsContainer'
 import UsersContainer from './Users/UsersContainer'
 import { Login } from '../Login/Login'
+import DialogsContainer from './Dialogs/DialogsMember/DialogsContainer'
 
 const Content = () => {
   return (
