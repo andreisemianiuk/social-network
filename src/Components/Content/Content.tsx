@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom'
 import { ProfilePage } from './Profile/ProfilePage'
 import { FriendsContainerPage } from './Friends/FriendsContainerPage'
 import UsersContainer from './Users/UsersContainer'
-import { Login } from '../Login/Login'
+import { LoginForm } from '../Header/LoginForm'
 import DialogsContainer from './Dialogs/DialogsMember/DialogsContainer'
 
 const Content = () => {
@@ -28,7 +28,7 @@ const Content = () => {
       />
       <Route
         path="/login"
-        render={() => <Login/>}
+        render={() => <LoginForm/>}
       />
     </div>
   )
