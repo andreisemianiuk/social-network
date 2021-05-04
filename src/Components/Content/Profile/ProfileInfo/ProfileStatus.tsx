@@ -2,11 +2,13 @@ import React, { ChangeEvent } from 'react'
 
 
 interface IProps {
+  status: string | null
+  changeStatus: (status: string) => void
 }
 
 interface IState {
   editMode: boolean
-  status: string
+  status: string | null
 }
 
 export class ProfileStatus extends React.Component<IProps, IState> {
@@ -14,7 +16,15 @@ export class ProfileStatus extends React.Component<IProps, IState> {
     super(props)
     this.state = {
       editMode: false,
-      status: 'Any status',
+      status: this.props.status,
+    }
+  }
+  
+  componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>, snapshot?: any) {
+    if (prevProps.status !== this.props.status) {
+      this.setState({
+        status: this.props.status,
+      })
     }
   }
   
@@ -31,6 +41,12 @@ export class ProfileStatus extends React.Component<IProps, IState> {
       editMode: false,
     })
   }
+  changeStatus = () => {
+    if (this.state.status) {
+      this.props.changeStatus(this.state.status)
+      this.deactivateEditMode()
+    }
+  }
   
   render() {
     return (
@@ -38,9 +54,9 @@ export class ProfileStatus extends React.Component<IProps, IState> {
         {this.state.editMode
           ? <div>
             <input
-              onBlur={this.deactivateEditMode}
+              onBlur={this.changeStatus}
               onChange={this.onChangeHandler}
-              value={this.state.status}
+              value={this.state.status || ''}
               autoFocus={true}
             />
           </div>
