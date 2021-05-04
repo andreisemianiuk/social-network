@@ -1,5 +1,12 @@
 import { v1 } from 'uuid'
-import { ActionTypes } from '../redux-store'
+
+const SEND_DIALOG_MESSAGE = 'SEND_DIALOG_MESSAGE'
+const CHANGE_DIALOG_TEXT = 'CHANGE_DIALOG_TEXT'
+
+export type ActionTypes =
+  | ReturnType<typeof changeDialogTextAC>
+  | ReturnType<typeof sendDialogMessageAC>
+
 
 export type DialogsType = {
   id: string
@@ -11,8 +18,6 @@ export type DialogsPageType = {
   dialogs: DialogsType[]
 }
 
-const SEND_DIALOG_MESSAGE = 'SEND_DIALOG_MESSAGE'
-const CHANGE_DIALOG_TEXT = 'CHANGE_DIALOG_TEXT'
 
 const initialState = {
   newDialogText: '',

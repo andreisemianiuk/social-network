@@ -10,12 +10,6 @@ export type AuthStateType = {
   isAuth: boolean
 }
 
-export type ResponseAuthType = {
-  data: AuthStateType,
-  resultCode: number | null
-  messages: string[] | null
-}
-
 type ActionTypes = ReturnType<typeof setAuthUser>
 
 const initialState: AuthStateType = {
@@ -45,7 +39,7 @@ export const setAuthUser = (data: AuthStateType) => {
   } as const
 }
 
-type AuthThunkType = ThunkAction<void, ResponseAuthType, unknown, ActionTypes>
+type AuthThunkType = ThunkAction<void, ResponseType, unknown, ActionTypes>
 
 export const getAuthTC = (): AuthThunkType => (dispatch) => {
   AuthAPI.me().then(data => {
