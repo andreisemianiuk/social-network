@@ -3,17 +3,15 @@ import { ThunkAction } from 'redux-thunk'
 import { ProfileAPI } from '../../api/Api'
 
 const ADD_POST = 'ADD_POST'
-const CHANGE_POST_TEXT = 'CHANGE_POST_TEXT'
 const SET_PROFILE = 'SET_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 
-type ActionTypes = ReturnType<typeof addPostAC>
-  | ReturnType<typeof changePostTextAC>
+type ActionTypes =
+  | ReturnType<typeof addPostAC>
   | ReturnType<typeof setProfile>
   | ReturnType<typeof setStatus>
 
 export type ProfilePageType = {
-  newPostText: string
   posts: PostType[]
   profile: ProfileUserType | null
   status: string | null
@@ -48,7 +46,6 @@ export type PostType = {
 
 
 const initialState: ProfilePageType = {
-  newPostText: '',
   posts: [
     {id: v1(), name: 'Andrey', message: 'hello', likes: 20, dislikes: 10},
     {id: v1(), name: 'Vera', message: 'hello1', likes: 10, dislikes: 12},
@@ -64,19 +61,13 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
       const newPost = {
         id: v1(),
         name: 'Somebody',
-        message: state.newPostText,
+        message: action.newPostText,
         likes: Math.floor(Math.random() * 100),
         dislikes: Math.floor(Math.random() * 100),
       }
       return {
         ...state,
         posts: [...state.posts, newPost],
-        newPostText: '',
-      }
-    case CHANGE_POST_TEXT:
-      return {
-        ...state,
-        newPostText: action.newText,
       }
     case SET_PROFILE:
       return {
@@ -93,15 +84,10 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
   }
 }
 
-export const addPostAC = () => {
+export const addPostAC = (newPostText: string) => {
   return {
     type: ADD_POST,
-  } as const
-}
-export const changePostTextAC = (text: string) => {
-  return {
-    type: CHANGE_POST_TEXT,
-    newText: text,
+    newPostText,
   } as const
 }
 

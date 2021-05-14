@@ -1,61 +1,25 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
-import styles from './Posts.module.css'
+import React from 'react'
 import { Post } from './Post/Post'
 import { generateKey } from '../../../../utilities/keyCreator'
 import { PostsPropsType } from './PostsContainer'
-import { PostReduxForm } from './PostForm'
+import { PostDataType, PostReduxForm } from './PostForm'
+import s from './Posts.module.css'
+import { AddPostForm } from './Post/PostFormWthFormik'
+import { addPostAC } from '../../../../redux/reducers/profile-reducer'
 
 export const Posts = (props: PostsPropsType) => {
-  let [error, setError] = useState<string>('')
-  
-  const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.currentTarget.value
-    if (value) {
-      setError('')
-    }
-    props.onChange(value)
+  const addPost = (values: PostDataType) => {
+    props.addPost(values.post)
   }
-  const addPostHandler = () => {
-    if (props.profilePage.newPostText) {
-      props.addPost()
-      props.onChange('')
-    } else {
-      setError('Required text')
-    }
+  const addPostOnKeyPress = (values: PostDataType) => {
+    props.addPost(values.post)
   }
-  const onKeyPressHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault()
-      if (props.profilePage.newPostText) {
-        props.addPost()
-        props.onChange('')
-      } else {
-        setError('Required text')
-      }
-    }
-  }
-  
   return (
-    <div className={styles.wrapper}>
+    <div className={s.wrapper}>
       <h1>My Posts</h1>
-      {/*<div>*/}
-      {/*  <textarea*/}
-      {/*    value={props.profilePage.newPostText}*/}
-      {/*    onChange={onChangeHandler}*/}
-      {/*    onKeyPress={onKeyPressHandler}*/}
-      {/*    className={styles.textarea}*/}
-      {/*  />*/}
-      {/*  {error && <div className={styles.error}>{error}</div>}*/}
-      {/*</div>*/}
-      <PostReduxForm/>
-      {/*<div>*/}
-      {/*  <button*/}
-      {/*    className={styles.btn}*/}
-      {/*    onClick={addPostHandler}*/}
-      {/*  >*/}
-      {/*    Add Post*/}
-      {/*  </button>*/}
-      {/*</div>*/}
+      <PostReduxForm onSubmit={addPost} />
+      {/*//component with formik*/}
+      {/*<AddPostForm/>*/}
       {props.profilePage.posts.map(v => (
         <Post key={generateKey(v.id)}
               id={v.id}
