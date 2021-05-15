@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import styles from './Dialogs.module.css'
 import { generateKey } from '../../../../utilities/keyCreator'
-import { DialogDataType, DialogReduxForm } from './DialogsForm'
+import { DialogFormik } from './DialogForm'
 
 type DialogsSenderType = {
   id: string
@@ -17,9 +17,6 @@ export const DialogsSender: React.FC<DialogsSenderType> = (props) => {
   const callback = () => {
     setCollapsed(!collapsed)
   }
-  const addMessage = (values: DialogDataType) => {
-    props.sendMessage(values.dialog, props.id)
-  }
   
   return (
     <div className={styles.container}>
@@ -30,7 +27,8 @@ export const DialogsSender: React.FC<DialogsSenderType> = (props) => {
       {!collapsed &&
       <div>
         {props.messages.map(m => <div key={generateKey(m)}>{m}</div>)}
-        <DialogReduxForm onSubmit={addMessage}/>
+        {/*<DialogReduxForm onSubmit={addMessage}/>*/}
+        <DialogFormik sendMessage={props.sendMessage} id={props.id}/>
       </div>
       }
     </div>

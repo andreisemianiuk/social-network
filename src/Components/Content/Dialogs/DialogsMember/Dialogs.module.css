@@ -22,3 +22,7 @@
 .sendMessageBtn {
 	cursor: pointer;
 }
+
+.error {
+	color: red;
+}
