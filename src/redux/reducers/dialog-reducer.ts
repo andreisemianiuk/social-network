@@ -1,12 +1,8 @@
 import { v1 } from 'uuid'
 
 const SEND_DIALOG_MESSAGE = 'SEND_DIALOG_MESSAGE'
-const CHANGE_DIALOG_TEXT = 'CHANGE_DIALOG_TEXT'
 
-export type ActionTypes =
-  | ReturnType<typeof changeDialogTextAC>
-  | ReturnType<typeof sendDialogMessageAC>
-
+export type ActionTypes = ReturnType<typeof sendDialogMessageAC>
 
 export type DialogsType = {
   id: string
@@ -14,13 +10,10 @@ export type DialogsType = {
   messages: string[]
 }
 export type DialogsPageType = {
-  newDialogText: string
   dialogs: DialogsType[]
 }
 
-
 const initialState = {
-  newDialogText: '',
   dialogs: [
     {
       id: v1(),
@@ -49,21 +42,9 @@ export const dialogReducer = (state: DialogsPageType = initialState, action: Act
           ? {...d, messages: [...d.messages, action.newText]}
           : d),
       }
-    case CHANGE_DIALOG_TEXT:
-      return {
-        ...state,
-        newDialogText: action.newText,
-      }
     default:
       return state
   }
-}
-
-export const changeDialogTextAC = (text: string) => {
-  return {
-    type: CHANGE_DIALOG_TEXT,
-    newText: text,
-  } as const
 }
 
 export const sendDialogMessageAC = (text: string, id: string) => {

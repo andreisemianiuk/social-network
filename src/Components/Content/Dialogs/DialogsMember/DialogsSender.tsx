@@ -1,32 +1,38 @@
-import React, { ChangeEvent, useState } from 'react'
-import styles from './DialogsMember.module.css'
+import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import styles from './Dialogs.module.css'
+import { generateKey } from '../../../../utilities/keyCreator'
+import { DialogDataType, DialogReduxForm } from './DialogsForm'
 
 type DialogsSenderType = {
   id: string
-  onChange: (value: string) => void
+  name: string
+  messages: string[]
   sendMessage: (value: string, id: string) => void
 }
 
-export const DialogsSender = (props: DialogsSenderType) => {
-  const [value, setValue] = useState<string>('')
+export const DialogsSender: React.FC<DialogsSenderType> = (props) => {
+  const [collapsed, setCollapsed] = useState<boolean>(true)
   
-  const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const newValue = e.currentTarget.value
-    setValue(newValue)
-    props.onChange(newValue)
+  const callback = () => {
+    setCollapsed(!collapsed)
   }
-  const sendMessage = () => {
-    props.sendMessage(value,props.id)
-    setValue('')
-    props.onChange(value)
+  const addMessage = (values: DialogDataType) => {
+    props.sendMessage(values.dialog, props.id)
   }
   
   return (
-    <div>
-      <textarea value={value} onChange={onChange}/>
+    <div className={styles.container}>
+      <NavLink activeClassName={styles.active} onClick={callback} to={`/dialogs/${props.id}`}>
+        <div>{props.name}</div>
+      </NavLink>
+      
+      {!collapsed &&
       <div>
-        <button className={styles.sendMessageBtn} onClick={sendMessage}>Send message</button>
+        {props.messages.map(m => <div key={generateKey(m)}>{m}</div>)}
+        <DialogReduxForm onSubmit={addMessage}/>
       </div>
+      }
     </div>
   )
 }
