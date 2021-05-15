@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { GetUsersResponseType } from '../Components/Content/Users/UsersContainer'
 import { ProfileUserType } from '../redux/reducers/profile-reducer'
-import { AuthStateType } from '../redux/reducers/auth-reducer'
+import { AuthStateType, AuthUserDataType } from '../redux/reducers/auth-reducer'
+import { FormDataType } from '../Components/Header/LoginForm'
 
 export type ResponseType<T = {}> = {
   data: T,
@@ -51,7 +52,15 @@ export const ProfileAPI = {
 
 export const AuthAPI = {
   me() {
-    return customInstance.get<ResponseType<AuthStateType>>(`auth/me`).then(
+    return customInstance.get<ResponseType<AuthUserDataType>>(`auth/me`).then(
+      response => {
+        return response.data
+      },
+    )
+  },
+  login(data: FormDataType) {
+    return customInstance.post<ResponseType<{ userId: number }>>(`auth/login`,
+      {...data}).then(
       response => {
         return response.data
       },
