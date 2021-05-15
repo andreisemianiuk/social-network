@@ -3,11 +3,75 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background-color:  aquamarine;
+	background-color: aquamarine;
 	padding-left: 35px;
-	padding-right: 50px;
+	padding-right: 30px;
 }
 
 .img {
 	width: 70px;
+}
+
+.userData {
+	margin: 10px auto;
+}
+
+.name {
+	text-align: center;
+	font-weight: bold;
+}
+
+.photoContainer {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	cursor: pointer;
+}
+
+.photo {
+	max-width: 40px;
+	max-height: 40px;
+	border: 2px solid white;
+	border-radius: 5px;
+}
+
+.dropdown {
+	position: relative;
+	top: 0;
+	left: 17px;
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 5px solid white;
+}
+
+.accountMenu {
+	position: absolute;
+	top: 50px;
+	right: 22px;
+	width: 100px;
+	height: 90px;
+	background-color: white;
+}
+
+.menuList {
+	color: black;
+	font-max-size: 0.8rem;
+}
+
+.menuList p {
+	padding-left: 10px;
+	margin: 1px;
+}
+
+.menuList p:hover {
+	background-color: bisque;
+}
+
+.logOut {
+	color: black;
 }
