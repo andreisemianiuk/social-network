@@ -66,6 +66,13 @@ export const AuthAPI = {
       },
     )
   },
+  logout() {
+    return customInstance.delete<ResponseType<{}>>(`auth/login`).then(
+      response => {
+        return response.data
+      },
+    )
+  },
 }
 
 export const FollowingAPI = {
