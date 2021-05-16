@@ -2,7 +2,7 @@ import React from 'react'
 import { User } from './User'
 import styles from './Users.module.css'
 import { UsersStateType } from '../../../redux/reducers/users-reducer'
-import { Preloader } from '../../../common/Preloader/Preloader'
+import { Preloader } from '../../../common/Preloaders/Preloader'
 
 type UsersPropsType = {
   changeCurrentPage: (value: number) => void

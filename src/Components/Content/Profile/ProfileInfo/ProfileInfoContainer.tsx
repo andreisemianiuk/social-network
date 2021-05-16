@@ -9,7 +9,7 @@ import {
   ProfileUserType,
   setProfile,
 } from '../../../../redux/reducers/profile-reducer'
-import { Preloader } from '../../../../common/Preloader/Preloader'
+import { Preloader } from '../../../../common/Preloaders/Preloader'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 
@@ -19,7 +19,7 @@ export type PathParamsType = {
 type PropsType = ProfileInfoContainerPropsType & RouteComponentProps<PathParamsType>
 
 class ProfileInfoContainer extends React.Component<PropsType> {
-  componentDidMount() {
+  componentDidMount() {debugger
     let userId = this.props.match.params.userId
     if (!userId) {
       userId = '12041'
