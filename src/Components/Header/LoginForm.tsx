@@ -1,10 +1,12 @@
 import React from 'react'
 import { Form, Formik } from 'formik'
-import { loginUserTC } from '../../redux/reducers/auth-reducer'
-import { useDispatch } from 'react-redux'
+import { login, logout } from '../../redux/reducers/auth-reducer'
+import { useDispatch, useSelector } from 'react-redux'
 import { MyCheckbox, MyTextInput } from '../../common/forms/inputsForForms'
 import * as Yup from 'yup'
 import s from './Header.module.css'
+import { AppStateType } from '../../redux/redux-store'
+import { Redirect } from 'react-router-dom'
 
 export type FormDataType = {
   email: string
@@ -26,8 +28,12 @@ const LoginForm: React.FC = () => {
     <Formik
       initialValues={initialValues}
       onSubmit={(values, actions) => {
-        dispatch(loginUserTC(values))
+        dispatch(login(values))
         actions.setSubmitting(false)
+      }}
+      onReset={(values, actions) => {
+        dispatch(logout())
+        actions.setSubmitting(true)
       }}
       validationSchema={Yup.object({
         email: Yup.string()
@@ -66,7 +72,8 @@ const LoginForm: React.FC = () => {
           </MyCheckbox>
         </div>
         <div>
-          <button className={s.loginBtn} type={'submit'}>Login</button>
+          <button className={s.loginBtn} type={'submit'}>Log In</button>
+          <button className={s.loginBtn} type={'reset'}>Log Out</button>
         </div>
       </Form>
     </Formik>
@@ -75,6 +82,8 @@ const LoginForm: React.FC = () => {
 
 
 export const LoginPage = () => {
+  const isAuth = useSelector<AppStateType>(state => state.auth.isAuth)
+  if (isAuth) return <Redirect to="/profile"/>
   return (
     <div>
       <h1>Login</h1>
@@ -82,4 +91,3 @@ export const LoginPage = () => {
     </div>
   )
 }
-
