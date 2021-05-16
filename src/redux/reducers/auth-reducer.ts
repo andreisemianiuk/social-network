@@ -1,22 +1,29 @@
 import { ThunkAction } from 'redux-thunk'
-import { AuthAPI, ProfileAPI } from '../../api/Api'
+import { AuthAPI } from '../../api/Api'
+import { FormDataType } from '../../Components/Header/LoginForm'
+import { Dispatch } from 'redux'
 
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
-const SET_USER_DATA = 'SET_USER_DATA'
+const SET_IS_AUTH = 'SET_IS_AUTH'
 
-export type AuthStateType = {
+
+export type AuthUserDataType = {
   id: number | null
   email: string | null
   login: string | null
+  photo?: string
+}
+export type AuthStateType = {
+  authData: AuthUserDataType
   isAuth: boolean
 }
 
-type ActionTypes = ReturnType<typeof setAuthUser | typeof setUserData>
-
+type ActionTypes =
+  | ReturnType<typeof setAuthUserData>
+  | ReturnType<typeof setIsAuth>
+  
 const initialState: AuthStateType = {
-  id: null,
-  email: null,
-  login: null,
+  authData: {id: null, login: null, email: null, photo: ''},
   isAuth: false,
 }
 
@@ -25,26 +32,26 @@ export const authReducer = (state: AuthStateType = initialState, action: ActionT
     case SET_AUTH_USER_DATA:
       return {
         ...state,
-        ...action.data,
-        isAuth: true,
+        authData: {...action.data},
+        
       }
-    case SET_USER_DATA:
+    case SET_IS_AUTH:
       return {
         ...state,
-        ...action.data,
+        isAuth: action.isAuth,
       }
     default:
       return state
   }
 }
-
-export const setUserData = (data: Array<string | undefined>) => {
+export const setIsAuth = (isAuth: boolean) => {
   return {
-    type: SET_USER_DATA,
-    data,
+    type: SET_IS_AUTH,
+    isAuth,
   } as const
 }
-export const setAuthUser = (data: AuthStateType) => {
+
+export const setAuthUserData = (data: AuthUserDataType) => {
   return {
     type: SET_AUTH_USER_DATA,
     data,
@@ -53,23 +60,30 @@ export const setAuthUser = (data: AuthStateType) => {
 
 type AuthThunkType = ThunkAction<void, ResponseType, unknown, ActionTypes>
 
-export const getAuthTC = (): AuthThunkType => (dispatch) => {
-  AuthAPI.me().then(data => {
-    if (data.resultCode === 0) {
-      dispatch(setAuthUser(data.data))
-    }
-  })
-}
-export const getUserDataTC = (): AuthThunkType => (dispatch) => {
-  AuthAPI.me().then(data => {
-    const userId = String(data.data.id)
-    if (data.resultCode === 0) {
-      ProfileAPI.getProfile(userId).then(data => {
-        const name = data.fullName
-        const img = data.photos.small
-        dispatch(setUserData([name, img]))
-      })
-    }
-  })
-  
-}
+export const login = (data: FormDataType): AuthThunkType =>
+  (dispatch: Dispatch<ActionTypes>) => {
+    AuthAPI.login(data).then(res => {
+      if (res.resultCode === 0) {
+        dispatch(setIsAuth(true))
+      }
+    })
+  }
+export const logout = (): AuthThunkType =>
+  (dispatch: Dispatch<ActionTypes>) => {
+    AuthAPI.logout().then(res => {
+      if (res.resultCode === 0) {
+        dispatch(setAuthUserData({login: null, email: null, id: null}))
+        dispatch(setIsAuth(false))
+      }
+    })
+  }
+
+export const getAuthUserDataTC = (): AuthThunkType =>
+  (dispatch: Dispatch<ActionTypes>) => {
+    AuthAPI.me().then(data => {
+      if (data.resultCode === 0) {
+        dispatch(setIsAuth(true))
+        dispatch(setAuthUserData(data.data))
+      }
+    })
+  }
