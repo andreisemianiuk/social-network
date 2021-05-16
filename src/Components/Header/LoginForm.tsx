@@ -34,6 +34,13 @@ const LoginForm: React.FC = () => {
           .min(10, 'Must be minimum 10 characters or more')
           .email('Invalid email address')
           .required('Required'),
+        password: Yup.string()
+          .matches(
+            /[\S]{8,15}/, 'please enter the correct password',
+          )
+          .required(
+            'Required field',
+          ),
       })}
     >
       <Form>
