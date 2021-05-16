@@ -1,8 +1,29 @@
-import React from 'react'
+import React, { CSSProperties } from 'react'
 import { FieldHookConfig, useField } from 'formik'
 
+const inputStyles = {
+  input: {
+    width: '200px',
+    height: '25px',
+    margin: '0 20px',
+  },
+  errorContainer: {
+    height: '20px',
+    padding: '5px 25px',
+  },
+  error: {
+    color: 'red',
+  },
+}
+const checkboxStyles = {
+  checkbox: {
+    margin: '0 0 20px 20px',
+  },
+}
+
 type InputPropsType = {
-  label: string
+  label?: string
+  style?: CSSProperties | undefined
 }
 
 export const MyTextInput = (props: InputPropsType & FieldHookConfig<string>) => {
@@ -13,10 +34,12 @@ export const MyTextInput = (props: InputPropsType & FieldHookConfig<string>) => 
   return (
     <>
       <label htmlFor={props.id || props.name}>{props.label}</label>
-      <input className="text-input" {...field} type={props.type} placeholder={props.placeholder}/>
-      {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
-      ) : null}
+      <input style={inputStyles.input} {...field} type={props.type} placeholder={props.placeholder}/>
+      <div style={inputStyles.errorContainer}>
+        {meta.touched && meta.error ? (
+          <div style={{...inputStyles.error, ...props.style}}>{meta.error}</div>
+        ) : null}
+      </div>
     </>
   )
 }
@@ -30,7 +53,7 @@ export const MyCheckbox: React.FC<FieldHookConfig<string>> = ({children, ...prop
   return (
     <div>
       <label className="checkbox-input">
-        <input type="checkbox" {...field} />
+        <input type="checkbox" style={checkboxStyles.checkbox} {...field} />
         {children}
       </label>
       {meta.touched && meta.error ? (

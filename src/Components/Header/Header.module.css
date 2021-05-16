@@ -75,3 +75,16 @@
 .logOut {
 	color: black;
 }
+
+.loginBtn {
+	width: 100px;
+	height: 35px;
+	margin-left: 40px;
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+/*.error {*/
+/*	background-color: red;*/
+/*}*/

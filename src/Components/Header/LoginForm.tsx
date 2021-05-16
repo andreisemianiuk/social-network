@@ -3,6 +3,8 @@ import { Form, Formik } from 'formik'
 import { loginUserTC } from '../../redux/reducers/auth-reducer'
 import { useDispatch } from 'react-redux'
 import { MyCheckbox, MyTextInput } from '../../common/forms/inputsForForms'
+import * as Yup from 'yup'
+import s from './Header.module.css'
 
 export type FormDataType = {
   email: string
@@ -27,11 +29,16 @@ const LoginForm: React.FC = () => {
         dispatch(loginUserTC(values))
         actions.setSubmitting(false)
       }}
+      validationSchema={Yup.object({
+        email: Yup.string()
+          .min(10, 'Must be minimum 10 characters or more')
+          .email('Invalid email address')
+          .required('Required'),
+      })}
     >
       <Form>
         <div>
           <MyTextInput
-            label=""
             name="email"
             type="email"
             placeholder="login"
@@ -39,7 +46,6 @@ const LoginForm: React.FC = () => {
         </div>
         <div>
           <MyTextInput
-            label=""
             name="password"
             type="password"
             placeholder="password"
@@ -53,7 +59,7 @@ const LoginForm: React.FC = () => {
           </MyCheckbox>
         </div>
         <div>
-          <button type={'submit'}>Login</button>
+          <button className={s.loginBtn} type={'submit'}>Login</button>
         </div>
       </Form>
     </Formik>
