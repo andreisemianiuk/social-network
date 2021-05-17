@@ -1,7 +1,7 @@
 import React from 'react'
 import { changeFriendAC, addFriendAC } from '../../../redux/reducers/sidebar-reducer'
 import { FriendsPage } from './FriendsPage'
-import { AppStateType } from '../../../redux/redux-store'
+import { RootStateType } from '../../../redux/redux-store'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 
@@ -13,7 +13,7 @@ type MapDispatchToPropsType = {
   addFriend: (friend: string) => void
 }
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+const mapStateToProps = (state: RootStateType): MapStateToPropsType => {
   return {
     friends: state.sidebar.friends,
   }

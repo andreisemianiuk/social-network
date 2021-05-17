@@ -2,7 +2,7 @@ import { v1 } from 'uuid'
 
 const SEND_DIALOG_MESSAGE = 'SEND_DIALOG_MESSAGE'
 
-export type ActionTypes = ReturnType<typeof sendDialogMessageAC>
+export type DialogsActionTypes = ReturnType<typeof sendDialogMessageAC>
 
 export type DialogsType = {
   id: string
@@ -33,7 +33,7 @@ const initialState = {
   ],
 }
 
-export const dialogReducer = (state: DialogsPageType = initialState, action: ActionTypes): DialogsPageType => {
+export const dialogReducer = (state: DialogsPageType = initialState, action: DialogsActionTypes): DialogsPageType => {
   switch (action.type) {
     case SEND_DIALOG_MESSAGE:
       return {

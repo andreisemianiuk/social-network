@@ -1,11 +1,11 @@
 import React, { ComponentType } from 'react'
 import { Login } from './Login'
 import { connect } from 'react-redux'
-import { AppStateType } from '../../redux/redux-store'
+import { RootStateType } from '../../redux/redux-store'
 import { AuthStateType, getAuthUserDataTC, logout } from '../../redux/reducers/auth-reducer'
 import { compose } from 'redux'
 
-class LoginContainer extends React.Component<PropsType, AppStateType> {
+class LoginContainer extends React.Component<PropsType, RootStateType> {
   componentDidMount() {
     this.props.getAuthUserData()
   }
@@ -32,7 +32,7 @@ type MapDispatchToPropsType = {
 }
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
-const MapStateToProps = (state: AppStateType): MapStateToPropsType => {
+const MapStateToProps = (state: RootStateType): MapStateToPropsType => {
   return {
     auth: state.auth,
     photo: state.profilePage.profile?.photos.small
@@ -41,7 +41,7 @@ const MapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
 export default compose<ComponentType>(
   // withAuthRedirect,
-  connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(
+  connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootStateType>(
     MapStateToProps,
     {
       getAuthUserData: getAuthUserDataTC,

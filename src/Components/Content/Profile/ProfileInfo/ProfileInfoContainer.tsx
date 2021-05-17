@@ -1,6 +1,6 @@
 import React, { ComponentType } from 'react'
 import { ProfileInfo } from './ProfileInfo'
-import { AppStateType } from '../../../../redux/redux-store'
+import { RootStateType } from '../../../../redux/redux-store'
 import { connect } from 'react-redux'
 import {
   changeStatusTC,
@@ -19,10 +19,10 @@ export type PathParamsType = {
 type PropsType = ProfileInfoContainerPropsType & RouteComponentProps<PathParamsType>
 
 class ProfileInfoContainer extends React.Component<PropsType> {
-  componentDidMount() {debugger
+  componentDidMount() {
     let userId = this.props.match.params.userId
     if (!userId) {
-      userId = '12041'
+      userId = `1049`
     }
     this.props.getProfile(userId)
     this.props.getStatus(userId)
@@ -47,27 +47,28 @@ class ProfileInfoContainer extends React.Component<PropsType> {
 type MapStateToPropsType = {
   profile: ProfileUserType | null
   status: string | null
+  authorizedUserId: number | null
 }
 
-type MapDispatchToPropsType =
-  {
-    setProfile: (profile: ProfileUserType) => void
-    getProfile: (userId: string) => void
-    getStatus: (userId: string) => void
-    changeStatus: (status: string) => void
-  }
+type MapDispatchToPropsType = {
+  setProfile: (profile: ProfileUserType) => void
+  getProfile: (userId: string) => void
+  getStatus: (userId: string) => void
+  changeStatus: (status: string) => void
+}
 
 type ProfileInfoContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+const mapStateToProps = (state: RootStateType): MapStateToPropsType => {
   return {
     profile: state.profilePage.profile,
     status: state.profilePage.status,
+    authorizedUserId: state.auth.authData.id,
   }
 }
 
 export default compose<ComponentType>(
-  connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(
+  connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootStateType>(
     mapStateToProps,
     {
       setProfile,

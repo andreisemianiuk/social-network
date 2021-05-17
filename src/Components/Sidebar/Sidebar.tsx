@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { generateKey } from '../../utilities/keyCreator'
 import { Avatar } from '../../images/template/avatar'
 import { connect } from 'react-redux'
-import { AppStateType } from '../../redux/redux-store'
+import { RootStateType } from '../../redux/redux-store'
 import { SidebarStateType } from '../../redux/reducers/sidebar-reducer'
 
 type MapStateToPropsType = {
@@ -36,7 +36,7 @@ const Sidebar = (props: MapStateToPropsType) => {
   )
 }
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType  => {
+const mapStateToProps = (state: RootStateType): MapStateToPropsType  => {
   return {
     sidebar: state.sidebar
   }

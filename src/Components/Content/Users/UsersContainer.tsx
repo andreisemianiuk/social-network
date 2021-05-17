@@ -2,15 +2,19 @@ import React, { ComponentType } from 'react'
 import { connect } from 'react-redux'
 import {
   changeCurrentPageTC,
-  follow, followTC, getUsersTC,
+  follow,
+  followTC,
+  getUsersTC,
   setCurrentPage,
   setTotalUsersCount,
-  setUsers, toggleFetching, toggleFollowingProgress,
-  unfollow, unfollowTC,
+  setUsers,
+  toggleFetching,
+  toggleFollowingProgress,
+  unfollow,
+  unfollowTC,
 } from '../../../redux/reducers/users-reducer'
-import { AppStateType } from '../../../redux/redux-store'
+import { RootStateType } from '../../../redux/redux-store'
 import { Users } from './Users'
-import { withAuthRedirect } from '../../../hoc/withAuthRedirect'
 import { compose } from 'redux'
 
 export type UserType = {
@@ -85,7 +89,7 @@ type MapDispatchToProps =
   }
 export type UsersPagePropsType = MapStateToProps & MapDispatchToProps
 
-const mapStateToProps = (state: AppStateType): MapStateToProps => {
+const mapStateToProps = (state: RootStateType): MapStateToProps => {
   return {
     users: state.usersPage.users,
     totalUsersCount: state.usersPage.totalCount,
@@ -97,7 +101,7 @@ const mapStateToProps = (state: AppStateType): MapStateToProps => {
 }
 
 export default compose<ComponentType>(
-  connect<MapStateToProps, MapDispatchToProps, {}, AppStateType>(
+  connect<MapStateToProps, MapDispatchToProps, {}, RootStateType>(
     mapStateToProps,
     {
       follow,
@@ -113,4 +117,4 @@ export default compose<ComponentType>(
       unfollowTC,
     },
   ),
-  withAuthRedirect)(UsersContainer)
+)(UsersContainer)

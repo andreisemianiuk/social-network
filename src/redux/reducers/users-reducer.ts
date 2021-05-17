@@ -1,6 +1,6 @@
 import { UserType } from '../../Components/Content/Users/UsersPage'
-import { ThunkAction } from 'redux-thunk'
 import { FollowingAPI, UsersAPI } from '../../api/Api'
+import { RootThunkType } from '../redux-store'
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
@@ -27,7 +27,7 @@ const initialState: UsersStateType = {
   inFollowingProgress: [],
 }
 
-export const usersReducer = (state: UsersStateType = initialState, action: ActionTypes): UsersStateType => {
+export const usersReducer = (state: UsersStateType = initialState, action: UsersActionTypes): UsersStateType => {
   switch (action.type) {
     case FOLLOW:
       return {
@@ -70,7 +70,7 @@ export const usersReducer = (state: UsersStateType = initialState, action: Actio
   return state
 }
 
-type ActionTypes =
+export type UsersActionTypes =
   | ReturnType<typeof follow>
   | ReturnType<typeof unfollow>
   | ReturnType<typeof setUsers>
@@ -124,9 +124,7 @@ export const toggleFollowingProgress = (inProgress: boolean, userId: number) => 
   } as const
 }
 
-type UsersThunkType = ThunkAction<void, UsersStateType, unknown, ActionTypes>
-
-export const getUsersTC = (currentPage: number, pageSize: number): UsersThunkType =>
+export const getUsersTC = (currentPage: number, pageSize: number): RootThunkType =>
   (dispatch) => {
     dispatch(toggleFetching(true))
     UsersAPI.getUsers(currentPage, pageSize).then(data => {
@@ -135,7 +133,7 @@ export const getUsersTC = (currentPage: number, pageSize: number): UsersThunkTyp
       dispatch(setTotalUsersCount(data.totalCount))
     })
   }
-export const changeCurrentPageTC = (page: number, pageSize: number): UsersThunkType =>
+export const changeCurrentPageTC = (page: number, pageSize: number): RootThunkType =>
   (dispatch) => {
     dispatch(toggleFetching(true))
     dispatch(setCurrentPage(page))
@@ -144,7 +142,7 @@ export const changeCurrentPageTC = (page: number, pageSize: number): UsersThunkT
       dispatch(setUsers(data.items))
     })
   }
-export const unfollowTC = (id: number): UsersThunkType => (dispatch) => {
+export const unfollowTC = (id: number): RootThunkType => (dispatch) => {
   dispatch(toggleFollowingProgress(true, id))
   FollowingAPI.unfollow(id).then(data => {
     if (data.resultCode === 0) {
@@ -153,7 +151,7 @@ export const unfollowTC = (id: number): UsersThunkType => (dispatch) => {
     dispatch(toggleFollowingProgress(false, id))
   })
 }
-export const followTC = (id: number): UsersThunkType => (dispatch) => {
+export const followTC = (id: number): RootThunkType => (dispatch) => {
   dispatch(toggleFollowingProgress(true, id))
   FollowingAPI.follow(id).then(data => {
     if (data.resultCode === 0) {

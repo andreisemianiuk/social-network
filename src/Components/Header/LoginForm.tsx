@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { MyCheckbox, MyTextInput } from '../../common/forms/inputsForForms'
 import * as Yup from 'yup'
 import s from './Header.module.css'
-import { AppStateType } from '../../redux/redux-store'
+import { RootStateType } from '../../redux/redux-store'
 import { Redirect } from 'react-router-dom'
 
 export type FormDataType = {
@@ -82,7 +82,7 @@ const LoginForm: React.FC = () => {
 
 
 export const LoginPage = () => {
-  const isAuth = useSelector<AppStateType>(state => state.auth.isAuth)
+  const isAuth = useSelector<RootStateType, boolean>(state => state.auth.isAuth)
   if (isAuth) return <Redirect to="/profile"/>
   return (
     <div>

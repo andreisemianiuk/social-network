@@ -1,7 +1,7 @@
 const ADD_FRIEND = 'ADD_FRIEND'
 const CHANGE_FRIEND = 'CHANGE_FRIEND'
 
-export type ActionTypes =
+export type SidebarActionTypes =
   | ReturnType<typeof changeFriendAC>
   | ReturnType<typeof addFriendAC>
 
@@ -16,7 +16,7 @@ const initialState: SidebarStateType = {
   friends: ['Sveta', 'Kolya', 'Vasya'],
 }
 
-export const sidebarReducer = (state: SidebarStateType = initialState, action: ActionTypes): SidebarStateType => {
+export const sidebarReducer = (state: SidebarStateType = initialState, action: SidebarActionTypes): SidebarStateType => {
   switch (action.type) {
     case ADD_FRIEND:
       return {
