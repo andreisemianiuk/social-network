@@ -5,8 +5,6 @@ import { Avatar } from '../../../images/template/avatar'
 import { NavLink } from 'react-router-dom'
 
 type UserPropsType = {
-  follow: (id: number) => void
-  unfollow: (id: number) => void
   unfollowTC: (id: number) => void
   followTC: (id: number) => void
   toggleFollowingProgress: (inProgress: boolean, userId: number) => void

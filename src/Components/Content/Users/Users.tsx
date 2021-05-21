@@ -6,8 +6,6 @@ import { Preloader } from '../../../common/Preloaders/Preloader'
 
 type UsersPropsType = {
   changeCurrentPage: (value: number) => void
-  follow: (id: number) => void
-  unfollow: (id: number) => void
   unfollowTC: (id: number) => void
   followTC: (id: number) => void
   toggleFollowingProgress: (inProgress: boolean, userId: number) => void
@@ -44,9 +42,7 @@ export const Users = (props: UsersPropsType) => {
           photos={u.photos}
           status={u.status}
           followed={u.followed}
-          follow={props.follow}
           followTC={props.followTC}
-          unfollow={props.unfollow}
           unfollowTC={props.unfollowTC}
           inFollowingProgress={props.inFollowingProgress}
           toggleFollowingProgress={props.toggleFollowingProgress}

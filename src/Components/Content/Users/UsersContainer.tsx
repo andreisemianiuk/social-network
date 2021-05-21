@@ -2,7 +2,6 @@ import React, { ComponentType } from 'react'
 import { connect } from 'react-redux'
 import {
   changeCurrentPageTC,
-  follow,
   followTC,
   getUsersTC,
   setCurrentPage,
@@ -10,7 +9,6 @@ import {
   setUsers,
   toggleFetching,
   toggleFollowingProgress,
-  unfollow,
   unfollowTC,
 } from '../../../redux/reducers/users-reducer'
 import { RootStateType } from '../../../redux/redux-store'
@@ -51,9 +49,7 @@ class UsersContainer extends React.Component<UsersPagePropsType> {
           totalCount={this.props.totalUsersCount}
           currentPage={this.props.currentPage}
           changeCurrentPage={this.changeCurrentPage}
-          follow={this.props.follow}
           followTC={this.props.followTC}
-          unfollow={this.props.unfollow}
           unfollowTC={this.props.unfollowTC}
           isFetching={this.props.isFetching}
           inFollowingProgress={this.props.inFollowingProgress}
@@ -75,8 +71,6 @@ type MapStateToProps = {
 }
 type MapDispatchToProps =
   {
-    follow: (id: number) => void
-    unfollow: (id: number) => void
     setUsers: (items: UserType[]) => void
     setTotalUsersCount: (totalCount: number) => void
     setCurrentPage: (page: number) => void
@@ -104,8 +98,6 @@ export default compose<ComponentType>(
   connect<MapStateToProps, MapDispatchToProps, {}, RootStateType>(
     mapStateToProps,
     {
-      follow,
-      unfollow,
       setUsers,
       setTotalUsersCount,
       setCurrentPage,
