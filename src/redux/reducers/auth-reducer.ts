@@ -1,5 +1,5 @@
-import { AuthAPI } from '../../api/Api'
-import { FormDataType } from '../../Components/Header/LoginForm'
+import { AuthAPI, ProfileAPI } from '../../api/Api'
+import { FormDataType } from '../../Components/Login/LoginForm'
 import { RootThunkType } from '../redux-store'
 
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
@@ -62,7 +62,7 @@ export const login = (data: FormDataType): RootThunkType =>
   async (dispatch) => {
     const res = await AuthAPI.login(data)
     if (res.resultCode === 0) {
-      dispatch(setIsAuth(true))
+      dispatch(getAuthUserDataTC())
     }
   }
 export const logout = (): RootThunkType =>
@@ -78,7 +78,11 @@ export const getAuthUserDataTC = (): RootThunkType =>
   async (dispatch) => {
     const res = await AuthAPI.me()
     if (res.resultCode === 0) {
+      const userId = res.data.id
+      if (userId) {
+        const response = await ProfileAPI.getProfile(userId.toString())
+        dispatch(setAuthUserData({...res.data, photo: response.photos.small}))
+      }
       dispatch(setIsAuth(true))
-      dispatch(setAuthUserData(res.data))
     }
   }
