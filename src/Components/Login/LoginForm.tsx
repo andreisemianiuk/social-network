@@ -4,7 +4,7 @@ import { login, logout } from '../../redux/reducers/auth-reducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { MyCheckbox, MyTextInput } from '../../common/forms/inputsForForms'
 import * as Yup from 'yup'
-import s from './Header.module.css'
+import s from '../Header/Header.module.css'
 import { RootStateType } from '../../redux/redux-store'
 import { Redirect } from 'react-router-dom'
 
@@ -30,10 +30,6 @@ const LoginForm: React.FC = () => {
       onSubmit={(values, actions) => {
         dispatch(login(values))
         actions.setSubmitting(false)
-      }}
-      onReset={(values, actions) => {
-        dispatch(logout())
-        actions.setSubmitting(true)
       }}
       validationSchema={Yup.object({
         email: Yup.string()
@@ -73,7 +69,6 @@ const LoginForm: React.FC = () => {
         </div>
         <div>
           <button className={s.loginBtn} type={'submit'}>Log In</button>
-          <button className={s.loginBtn} type={'reset'}>Log Out</button>
         </div>
       </Form>
     </Formik>

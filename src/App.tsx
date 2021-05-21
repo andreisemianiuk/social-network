@@ -1,12 +1,12 @@
 import React from 'react'
 import './App.css'
-import { Header } from './Components/Header/Header'
 import Content from './Components/Content/Content'
 import SidebarContainer from './Components/Sidebar/Sidebar'
 import { connect } from 'react-redux'
 import { RootStateType } from './redux/redux-store'
 import { initializeApp } from './redux/reducers/app-reducer'
 import { Preloader } from './common/Preloaders/Preloader'
+import HeaderContainer from './Components/Header/HeaderContainer'
 
 class App extends React.Component<AppPropsType> {
   componentDidMount() {
@@ -17,7 +17,7 @@ class App extends React.Component<AppPropsType> {
     if (!this.props.initialized) return <Preloader/>
     return (
       <div className="container">
-        <Header/>
+        <HeaderContainer/>
         <SidebarContainer/>
         <Content/>
       </div>

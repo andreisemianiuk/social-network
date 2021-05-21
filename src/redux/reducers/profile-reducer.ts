@@ -103,14 +103,8 @@ export const setStatus = (status: string) => {
     status,
   } as const
 }
-// export const changeStatus = (status: string) => {
-//   return {
-//     type: SET_STATUS,
-//     status,
-//   } as const
-// }
 
-
+//Thunk Creators
 export const getProfileTC = (userId: string): RootThunkType => (dispatch) => {
   ProfileAPI.getProfile(userId).then(data => {
     dispatch(setProfile(data))

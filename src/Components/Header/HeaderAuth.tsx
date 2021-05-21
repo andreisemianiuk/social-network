@@ -1,22 +1,23 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import s from './Header.module.css'
+import { AuthUserDataType } from '../../redux/reducers/auth-reducer'
 
 type LoginPropsType = {
+  authData: AuthUserDataType
   isAuth: boolean
-  login: string | null
-  photo: string | undefined
   logout: () => void
 }
 
-export const Login = (props: LoginPropsType) => {
-  const {login, photo, isAuth, logout} = props
+export const HeaderAuth = (props: LoginPropsType) => {
+  const {logout, isAuth} = props
+  const {login, photo} = props.authData
   const [isOpen, setIsOpen] = useState(false)
   
   const toggleMenu = () => {
     setIsOpen(!isOpen)
   }
-  // if (!isAuth) return <Redirect to={'login'}/>
+  
   return (
     <div>
       {isAuth

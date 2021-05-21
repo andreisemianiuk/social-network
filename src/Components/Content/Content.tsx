@@ -5,7 +5,7 @@ import { ProfilePage } from './Profile/ProfilePage'
 import { FriendsContainerPage } from './Friends/FriendsContainerPage'
 import UsersContainer from './Users/UsersContainer'
 import DialogsContainer from './Dialogs/DialogsMember/DialogsContainer'
-import { LoginPage } from '../Header/LoginForm'
+import { LoginPage } from '../Login/LoginForm'
 
 const Content = () => {
   return (

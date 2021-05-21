@@ -2,7 +2,7 @@ import axios from 'axios'
 import { GetUsersResponseType } from '../Components/Content/Users/UsersContainer'
 import { ProfileUserType } from '../redux/reducers/profile-reducer'
 import { AuthStateType, AuthUserDataType } from '../redux/reducers/auth-reducer'
-import { FormDataType } from '../Components/Header/LoginForm'
+import { FormDataType } from '../Components/Login/LoginForm'
 
 export type ResponseType<T = {}> = {
   data: T,
