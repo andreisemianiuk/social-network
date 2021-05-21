@@ -12,6 +12,7 @@ import {
 import { Preloader } from '../../../../common/Preloaders/Preloader'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { compose } from 'redux'
+import { getAuthorizedUserId, getProfile, getStatus } from '../../../../redux/selectors/profile-selectors'
 
 export type PathParamsType = {
   userId: string | undefined,
@@ -66,13 +67,11 @@ type MapDispatchToPropsType = {
 
 type ProfileInfoContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-const mapStateToProps = (state: RootStateType): MapStateToPropsType => {
-  return {
-    profile: state.profilePage.profile,
-    status: state.profilePage.status,
-    authorizedUserId: state.auth.authData.id,
-  }
-}
+const mapStateToProps = (state: RootStateType): MapStateToPropsType => ({
+  profile: getProfile(state),
+  status: getStatus(state),
+  authorizedUserId: getAuthorizedUserId(state),
+})
 
 export default compose<ComponentType>(
   connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootStateType>(

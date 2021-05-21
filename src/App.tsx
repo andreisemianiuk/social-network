@@ -7,6 +7,7 @@ import { RootStateType } from './redux/redux-store'
 import { initializeApp } from './redux/reducers/app-reducer'
 import { Preloader } from './common/Preloaders/Preloader'
 import HeaderContainer from './Components/Header/HeaderContainer'
+import { getInitialized } from './redux/selectors/app-selectors'
 
 class App extends React.Component<AppPropsType> {
   componentDidMount() {
@@ -34,7 +35,7 @@ type MapDispatchToPropsType = {
 type AppPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 const mapStateToProps = (state: RootStateType): MapStateToPropsType => ({
-  initialized: state.app.initialized,
+  initialized: getInitialized(state),
 })
 
 export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootStateType>(

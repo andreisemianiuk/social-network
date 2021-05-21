@@ -14,6 +14,13 @@ import {
 import { RootStateType } from '../../../redux/redux-store'
 import { Users } from './Users'
 import { compose } from 'redux'
+import {
+  getCurrentPage, getInFollowingProgress,
+  getIsFetching,
+  getPageSize,
+  getTotalUsersCount,
+  getUsers,
+} from '../../../redux/selectors/users-selectors'
 
 export type UserType = {
   id: number
@@ -85,12 +92,12 @@ export type UsersPagePropsType = MapStateToProps & MapDispatchToProps
 
 const mapStateToProps = (state: RootStateType): MapStateToProps => {
   return {
-    users: state.usersPage.users,
-    totalUsersCount: state.usersPage.totalCount,
-    currentPage: state.usersPage.currentPage,
-    pageSize: state.usersPage.pageSize,
-    isFetching: state.usersPage.isFetching,
-    inFollowingProgress: state.usersPage.inFollowingProgress,
+    users: getUsers(state),
+    totalUsersCount: getTotalUsersCount(state),
+    currentPage: getCurrentPage(state),
+    pageSize: getPageSize(state),
+    isFetching: getIsFetching(state),
+    inFollowingProgress: getInFollowingProgress(state),
   }
 }
 

@@ -15,20 +15,20 @@ const Sidebar = (props: MapStateToPropsType) => {
   return (
     <nav className={styles.nav}>
       <div className={styles.link}>
-        <NavLink to='/profile' activeClassName={styles.active}>Profile</NavLink>
+        <NavLink to="/profile" activeClassName={styles.active}>Profile</NavLink>
       </div>
       <div className={styles.link}>
-        <NavLink to='/dialogs' activeClassName={styles.active}>Dialogs</NavLink>
+        <NavLink to="/dialogs" activeClassName={styles.active}>Dialogs</NavLink>
       </div>
       <div className={styles.link}>
-        <NavLink to='/users' activeClassName={styles.active}>Users</NavLink>
+        <NavLink to="/users" activeClassName={styles.active}>Users</NavLink>
       </div>
       <div className={`${styles.link} ${styles.friends}`}>
-        <NavLink to='/friends' activeClassName={styles.active}>Friends</NavLink>
+        <NavLink to="/friends" activeClassName={styles.active}>Friends</NavLink>
       </div>
       <div className={styles.friendsWrapper}>
         {props.sidebar.friends.map((v: React.ReactNode) => (<div className={styles.friend} key={generateKey(v)}>
-          <img className={styles.img} src={Avatar} alt='ava'/>
+          <img className={styles.img} src={Avatar} alt="ava"/>
           <div className={styles.name}>{v}</div>
         </div>))}
       </div>
@@ -36,16 +36,11 @@ const Sidebar = (props: MapStateToPropsType) => {
   )
 }
 
-const mapStateToProps = (state: RootStateType): MapStateToPropsType  => {
-  return {
-    sidebar: state.sidebar
-  }
-}
-const mapDispatchToProps = () => {
-  return {
-  }
-}
+const mapStateToProps = (state: RootStateType): MapStateToPropsType => ({
+  sidebar: state.sidebar,
+})
+const mapDispatchToProps = () => ({})
 
-const SidebarContainer = connect(mapStateToProps,mapDispatchToProps)(Sidebar)
+const SidebarContainer = connect(mapStateToProps, mapDispatchToProps)(Sidebar)
 
 export default SidebarContainer

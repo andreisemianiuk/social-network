@@ -7,6 +7,7 @@ import { compose } from 'redux'
 import styles from './Header.module.css'
 import logo from '../../images/template/structure.png'
 import { NavLink } from 'react-router-dom'
+import { getAuth } from '../../redux/selectors/header-selectors'
 
 class HeaderContainer extends React.Component<PropsType, RootStateType> {
   
@@ -34,14 +35,11 @@ type MapDispatchToPropsType = {
 }
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
-const MapStateToProps = (state: RootStateType): MapStateToPropsType => {
-  return {
-    auth: state.auth
-  }
-}
+const MapStateToProps = (state: RootStateType): MapStateToPropsType => ({
+  auth: getAuth(state),
+})
 
 export default compose<ComponentType>(
-  // withAuthRedirect,
   connect<MapStateToPropsType, MapDispatchToPropsType, {}, RootStateType>(
     MapStateToProps,
     {
