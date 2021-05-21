@@ -22,10 +22,17 @@ class ProfileInfoContainer extends React.Component<PropsType> {
   componentDidMount() {
     let userId = this.props.match.params.userId
     if (!userId) {
-      userId = `1049`
+      if (this.props.authorizedUserId) {
+        userId = this.props.authorizedUserId.toString()
+      }
+      if (!userId) {
+        this.props.history.push('/login')
+      }
     }
-    this.props.getProfile(userId)
-    this.props.getStatus(userId)
+    if (typeof userId === 'string') {
+      this.props.getProfile(userId)
+      this.props.getStatus(userId)
+    }
   }
   
   render() {
