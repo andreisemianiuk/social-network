@@ -5,6 +5,7 @@ import up from '../../../../images/template/like.png'
 import down from '../../../../images/template/thumbs-down.png'
 import { Avatar } from '../../../../images/template/avatar'
 import { ProfileStatus } from './ProfileStatus'
+import { ProfileStatusWithHooks } from './ProfileStatusWithHooks'
 
 
 type ProfileInfoPropsType = {
@@ -23,7 +24,8 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
           <img className={styles.photo} src={photos.small ? photos.small : Avatar} alt={'ava'}/>
         </div>
         <div className={styles.name}>{fullName}</div>
-        <ProfileStatus status={props.status} changeStatus={props.changeStatus}/>
+        {/*<ProfileStatus status={props.status} changeStatus={props.changeStatus}/>*/}
+        <ProfileStatusWithHooks status={props.status} changeStatus={props.changeStatus}/>
       </div>
       <div className={styles.jobBlock}>
         <div>

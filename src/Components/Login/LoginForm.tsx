@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form, Formik } from 'formik'
-import { login, logout } from '../../redux/reducers/auth-reducer'
+import { login } from '../../redux/reducers/auth-reducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { MyCheckbox, MyTextInput } from '../../common/forms/inputsForForms'
 import * as Yup from 'yup'
