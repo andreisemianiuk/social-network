@@ -80,8 +80,13 @@ export const getAuthUserDataTC = (): RootThunkType =>
     if (res.resultCode === 0) {
       const userId = res.data.id
       if (userId) {
+        try {
         const response = await ProfileAPI.getProfile(userId.toString())
         dispatch(setAuthUserData({...res.data, photo: response.photos.small}))
+        } catch (e) {
+          console.log(e)
+          dispatch(setAuthUserData({...res.data, photo: undefined}))
+        }
       }
       dispatch(setIsAuth(true))
     }

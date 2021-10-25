@@ -7,6 +7,9 @@ export const getProfile = (state: RootStateType): ProfileUserType | null => {
 export const getStatus = (state: RootStateType): string | null => {
   return state.profilePage.status
 }
+export const getStatusIsFetching = (state: RootStateType): boolean => {
+  return state.profilePage.statusIsFetching
+}
 export const getAuthorizedUserId = (state: RootStateType): number | null => {
   return state.auth.authData.id
 }

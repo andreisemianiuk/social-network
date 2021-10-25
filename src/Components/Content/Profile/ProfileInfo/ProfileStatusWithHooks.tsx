@@ -1,14 +1,21 @@
-import React, { ChangeEvent, useState } from 'react'
-
+import React, { ChangeEvent, useEffect, useState } from 'react'
+import loader from '../../../../images/template/loader.svg'
+import { Preloader } from '../../../../common/Preloaders/Preloader'
 
 interface IProps {
   status: string | null
+  statusIsFetching: boolean
   changeStatus: (status: string) => void
 }
 
-export const ProfileStatusWithHooks: React.FC<IProps> = ({status, changeStatus}) => {
+export const ProfileStatusWithHooks: React.FC<IProps> = ({status, statusIsFetching, changeStatus}) => {
   const [editMode, setEditMode] = useState<boolean>(false)
   const [statusValue, setStatusValue] = useState<string | null>(status)
+  // const [statusIsFetching, setStatusIsFetching] = useState<boolean>(false)
+  
+  useEffect(() => {
+    setStatusValue(status)
+  }, [status])
   
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setStatusValue(e.currentTarget.value)
@@ -31,7 +38,10 @@ export const ProfileStatusWithHooks: React.FC<IProps> = ({status, changeStatus})
             autoFocus={true}
           />
         </div>
-        : <div onDoubleClick={activateEditMode}>{status}</div>
+        : statusIsFetching
+          // ? <img src={loader} alt={'preloader for status'}/>
+        ? <Preloader/>
+          : <div onDoubleClick={activateEditMode}>{status}</div>
       }
     </>
   )

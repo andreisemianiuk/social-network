@@ -4,18 +4,25 @@ import { ProfileUserType } from '../../../../redux/reducers/profile-reducer'
 import up from '../../../../images/template/like.png'
 import down from '../../../../images/template/thumbs-down.png'
 import { Avatar } from '../../../../images/template/avatar'
-import { ProfileStatus } from './ProfileStatus'
 import { ProfileStatusWithHooks } from './ProfileStatusWithHooks'
 
 
 type ProfileInfoPropsType = {
   profile: ProfileUserType
   status: string | null
+  statusIsFetching: boolean
   changeStatus: (status: string) => void
 }
 
-export const ProfileInfo = (props: ProfileInfoPropsType) => {
-  const {fullName, contacts, lookingForAJob, lookingForAJobDescription, photos} = props.profile
+export const ProfileInfo: React.FC<ProfileInfoPropsType> = (
+  {
+    profile,
+    status,
+    statusIsFetching,
+    changeStatus,
+  },
+) => {
+  const {fullName, contacts, lookingForAJob, lookingForAJobDescription, photos} = profile
   
   return (
     <div className={styles.profileBlock}>
@@ -25,7 +32,7 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
         </div>
         <div className={styles.name}>{fullName}</div>
         {/*<ProfileStatus status={props.status} changeStatus={props.changeStatus}/>*/}
-        <ProfileStatusWithHooks status={props.status} changeStatus={props.changeStatus}/>
+        <ProfileStatusWithHooks status={status} statusIsFetching={statusIsFetching} changeStatus={changeStatus}/>
       </div>
       <div className={styles.jobBlock}>
         <div>

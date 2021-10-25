@@ -12,7 +12,12 @@ import {
 import { Preloader } from '../../../../common/Preloaders/Preloader'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { compose } from 'redux'
-import { getAuthorizedUserId, getProfile, getStatus } from '../../../../redux/selectors/profile-selectors'
+import {
+  getAuthorizedUserId,
+  getProfile,
+  getStatus,
+  getStatusIsFetching,
+} from '../../../../redux/selectors/profile-selectors'
 
 export type PathParamsType = {
   userId: string | undefined,
@@ -44,6 +49,7 @@ class ProfileInfoContainer extends React.Component<PropsType> {
             profile={this.props.profile}
             status={this.props.status}
             changeStatus={this.props.changeStatus}
+            statusIsFetching={this.props.statusIsFetching}
           />
           : <Preloader/>}
       </>
@@ -55,6 +61,7 @@ class ProfileInfoContainer extends React.Component<PropsType> {
 type MapStateToPropsType = {
   profile: ProfileUserType | null
   status: string | null
+  statusIsFetching: boolean
   authorizedUserId: number | null
 }
 
@@ -63,6 +70,7 @@ type MapDispatchToPropsType = {
   getProfile: (userId: string) => void
   getStatus: (userId: string) => void
   changeStatus: (status: string) => void
+  // changeStatusIsFetching: (isFetching: boolean) => void
 }
 
 type ProfileInfoContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -70,6 +78,7 @@ type ProfileInfoContainerPropsType = MapStateToPropsType & MapDispatchToPropsTyp
 const mapStateToProps = (state: RootStateType): MapStateToPropsType => ({
   profile: getProfile(state),
   status: getStatus(state),
+  statusIsFetching:  getStatusIsFetching(state),
   authorizedUserId: getAuthorizedUserId(state),
 })
 
@@ -81,6 +90,7 @@ export default compose<ComponentType>(
       getProfile: getProfileTC,
       getStatus: getStatusTC,
       changeStatus: changeStatusTC,
+      // changeStatusIsFetching
     }),
   withRouter,
 )(ProfileInfoContainer)

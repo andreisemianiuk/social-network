@@ -5,16 +5,18 @@ import { RootThunkType } from '../redux-store'
 const ADD_POST = 'ADD_POST'
 const SET_PROFILE = 'SET_PROFILE'
 const SET_STATUS = 'SET_STATUS'
+const SET_STATUS_IS_FETCHING = 'SET_STATUS_IS_FETCHING'
 
-export type ProfileActionTypes =
-  | ReturnType<typeof addPostAC>
-  | ReturnType<typeof setProfile>
-  | ReturnType<typeof setStatus>
+export type ProfileActionTypes = ReturnType<typeof addPostAC
+  | typeof setProfile
+  | typeof setStatus
+  | typeof setStatusIsFetching>
 
 export type ProfilePageType = {
   posts: PostType[]
   profile: ProfileUserType | null
   status: string | null
+  statusIsFetching: boolean
 }
 export type ProfileUserType = {
   userId: number
@@ -53,6 +55,7 @@ const initialState: ProfilePageType = {
   ],
   profile: null,
   status: null,
+  statusIsFetching: false,
 }
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionTypes): ProfilePageType => {
@@ -79,6 +82,11 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Pr
         ...state,
         status: action.status,
       }
+    case SET_STATUS_IS_FETCHING:
+      return {
+        ...state,
+        statusIsFetching: action.isFetching,
+      }
     default:
       return state
   }
@@ -103,6 +111,12 @@ export const setStatus = (status: string) => {
     status,
   } as const
 }
+export const setStatusIsFetching = (isFetching: boolean) => {
+  return {
+    type: SET_STATUS_IS_FETCHING,
+    isFetching,
+  } as const
+}
 
 //Thunk Creators
 export const getProfileTC = (userId: string): RootThunkType => (dispatch) => {
@@ -116,9 +130,15 @@ export const getStatusTC = (userId: string): RootThunkType => (dispatch) => {
   })
 }
 export const changeStatusTC = (status: string): RootThunkType => (dispatch) => {
-  ProfileAPI.updateStatus(status).then(data => {
-    if (data.resultCode === 0) {
-      dispatch(setStatus(status))
-    }
-  })
+  try {
+    dispatch(setStatusIsFetching(true))
+    ProfileAPI.updateStatus(status).then(data => {
+      if (data.resultCode === 0) {
+        dispatch(setStatus(status))
+        dispatch(setStatusIsFetching(false))
+      }
+    })
+  } catch (e) {
+    console.log(e.data.error)
+  }
 }

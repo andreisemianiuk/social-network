@@ -37,9 +37,9 @@ const LoginForm: React.FC = () => {
           .email('Invalid email address')
           .required('Required'),
         password: Yup.string()
-          .matches(
-            /[\S]{8,15}/, 'please enter the correct password',
-          )
+          // .matches(
+          //   /[\S]{8,15}/, 'please enter the correct password',
+          // )
           .required(
             'Required field',
           ),
